@@ -1,7 +1,7 @@
 /**
- * textareabound jQuery plugin
+ * TextareaBound jQuery plugin - version 0.1.0
  * 
- * author: keul
+ * Author: Keul (http://keul.it/)
  */
 
 /*
@@ -104,7 +104,3 @@ function checkBounds() {
 }
 */
 
-jq(document).ready(function(){
-	jq("#aaa").maxLinesLengthBound(30).maxLinesCountBound(10);
-	jq("#bbb").maxLinesLengthBound(30).maxLinesCountBound(10);
-})
