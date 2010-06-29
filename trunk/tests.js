@@ -9,4 +9,5 @@ $(document).ready(function(){
 	})
 	$(".c1").maxLinesLengthBound(25).maxLinesCountBound(8);
 	$("#t1").maxLinesLengthBound(20).maxLinesCountBound(5);
+	$("#t4").maxTextLength(20);
 })
