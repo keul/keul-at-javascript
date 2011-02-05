@@ -5,4 +5,6 @@
 
 $(document).ready(function() {
 	
+	$("#example1 strong").inlineEdit();
+	
 });

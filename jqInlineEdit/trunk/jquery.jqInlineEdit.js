@@ -9,12 +9,18 @@
 
 (function($) {
 	$.fn.inlineEdit = function(ops) {
-		var options = {};
+		var options = {
+			event: 'click'
+		};
 		$.extend(options, ops || {});
 		
 		return this.each(function() {
 			var $this = $(this);
+			
+			$this.bind(options.event, function(event) {
 				
+			});
+			
 		});
 	};
 })(jQuery);
