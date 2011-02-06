@@ -4,6 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>jqInlineEdit jQuery Plugin - tests</title>
+		<link rel="stylesheet" type="text/css" media="all" href="tests.css" />
 		<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
 		<script type="text/javascript" src="jquery.jqInlineEdit.js"></script>
 		<script type="text/javascript" src="tests.js"></script>
@@ -11,7 +12,7 @@
     <body>
         <h1>jqInlineEdit jQuery Plugin - tests</h1>
 		
-		<!-- We need a form for many reasons ant test purposes -->
+		<!-- We need a form for many reasons and test purposes -->
 		<form action="http://foo.com">
 		
 		<div id="example1" class="example">
@@ -20,9 +21,18 @@
 				Click on the <strong>bold text</strong> to edit it.
 			</div>
 			<p class="summary">
-				Lorem ipsum
-			</p>
-			
+				Simple: you can customize the bold text clicking on it.
+			</p>			
+		</div>
+
+		<div id="example2" class="example">
+			<h2>Example 2: Multiple Editing</h2>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> again, but also the <em>italic</em> ones.
+			</div>
+			<p class="summary">
+				You can begin editing more than a field, not forced to one.
+			</p>			
 		</div>
 		
 		</form>

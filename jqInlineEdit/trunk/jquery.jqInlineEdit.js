@@ -10,7 +10,8 @@
 (function($) {
 	$.fn.inlineEdit = function(ops) {
 		var options = {
-			event: 'click'
+			event: 'click',
+			multiEditing: false
 		};
 		$.extend(options, ops || {});
 		
@@ -21,7 +22,7 @@
 				event.preventDefault();
 				$this.data('originalValue', $this.text());
 				var originalSize = $this.width();
-				var $editField = $('<input/>', {'type': 'text', 'class': 'editField'});
+				var $editField = $('<input/>', {'type': 'text', 'class': 'editField'}).val($this.data('originalValue'));
 				$editField.css('width', originalSize + 'px');
 				$this.empty().append($editField).unbind(options.event+'.InlineEdit');
 				$editField.keydown(function(event) {
@@ -33,7 +34,8 @@
 						$editField.trigger('update.InlineEdit');
 					}
 				}).blur(function(event) {
-					$editField.trigger('update.InlineEdit');
+					if (!options.multiEditing)
+						$editField.trigger('update.InlineEdit');
 				}).focus();
 				
 			}			
