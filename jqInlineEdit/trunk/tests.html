@@ -26,17 +26,37 @@
     >>> $("#example1 strong").inlineEdit();
 			</pre>	
 			<p class="summary">
-				Simple: you can customize the bold text clicking on it.
+				Simple: you can customize the bold text clicking on it.<br/>
+				Click <code>ENTER</code> key to accept the new value, or <code>ESC</code>
+				key to cancel editing and restoring original value.
 			</p>
 		</div>
 
+
 		<div id="example2" class="example">
-			<h2>Example 2: Multiple Editing</h2>
+			<h2>Example 2: More To Be Edited</h2>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> or on the <em>italic</em> ones.<br/>
+			</div>
+			<pre>
+    >>> $("#example2 strong,#example2 em")
+    ...     .inlineEdit({multiEditing: true});
+			</pre>
+			<p class="summary">
+				When editing a field you can click onto another field to stop editing the first and starting editing the second.<br/>
+				By default you can edit only one field at time.
+			</p>
+		</div>
+
+		<h2>2 - Somewhere Above Defaults</h2>
+
+		<div id="example3" class="example">
+			<h2>Example 3: Multiple Editing</h2>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> again, but also the <em>italic</em> ones.
 			</div>
 			<pre>
-    >>> $("#example2 strong,#example2 em")
+    >>> $("#example2 strong,#example3 em")
     ...     .inlineEdit({multiEditing: true});
 			</pre>
 			<p class="summary">

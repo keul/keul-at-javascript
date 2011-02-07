@@ -6,6 +6,7 @@
 $(document).ready(function() {
 	
 	$("#example1 strong").inlineEdit();
-	$("#example2 strong,#example2 em").inlineEdit({multiEditing: true});
+	$("#example2 strong,#example2 em").inlineEdit();
+	$("#example3 strong,#example3 em").inlineEdit({multiEditing: true});
 	
 });

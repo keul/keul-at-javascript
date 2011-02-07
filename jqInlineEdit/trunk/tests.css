@@ -11,3 +11,12 @@
 pre {
 	font-family: "Courier New", Courier, monospace;
 }
+
+.exampleBody {
+	padding: 0.3em 1em;
+	background-color: #ce6363;
+}
+
+.example .editField {
+	background-color: #ce6363;	
+}
