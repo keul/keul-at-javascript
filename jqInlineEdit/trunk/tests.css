@@ -2,6 +2,15 @@
  * CSS rules and styles for the jqInlineEdit tutorial
  */
 
+body {
+	background-color: #f0f0f0;
+}
+
+h1 {
+	text-align: center;
+	text-decoration: underline;
+}
+
 .example {
 	padding: 0.3em;
 	border: 1px solid blue;
@@ -14,9 +23,9 @@ pre {
 
 .exampleBody {
 	padding: 0.3em 1em;
-	background-color: #ce6363;
+	background-color: #ce8383;
 }
 
 .example .editField {
-	background-color: #ce6363;	
+	background-color: #ce8383;	
 }
