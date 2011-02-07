@@ -1,9 +1,13 @@
 /**
- * 
+ * CSS rules and styles for the jqInlineEdit tutorial
  */
 
 .example {
 	padding: 0.3em;
 	border: 1px solid blue;
 	margin-bottom: 0.5em;
+}
+
+pre {
+	font-family: "Courier New", Courier, monospace;
 }

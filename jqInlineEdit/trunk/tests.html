@@ -15,14 +15,19 @@
 		<!-- We need a form for many reasons and test purposes -->
 		<form action="http://foo.com">
 		
+		<h2>1 - Let's Start Simple</h2>
+		
 		<div id="example1" class="example">
 			<h2>Example 1: The Most Basic Example In The World</h2>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit it.
 			</div>
+			<pre>
+    >>> $("#example1 strong").inlineEdit();
+			</pre>	
 			<p class="summary">
 				Simple: you can customize the bold text clicking on it.
-			</p>			
+			</p>
 		</div>
 
 		<div id="example2" class="example">
@@ -30,9 +35,14 @@
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> again, but also the <em>italic</em> ones.
 			</div>
+			<pre>
+    >>> $("#example2 strong,#example2 em")
+    ...     .inlineEdit({multiEditing: true});
+			</pre>
 			<p class="summary">
-				You can begin editing more than a field, not forced to one.
-			</p>			
+				You can begin editing more than a field, not forced to one.<br/>
+				For this, you simple need to use the <code>multiEditing</code> option to <code>true</code>.
+			</p>
 		</div>
 		
 		</form>
