@@ -13,7 +13,7 @@
         <h1>jqInlineEdit jQuery Plugin - tests</h1>
 		
 		<!-- We need a form for many reasons and test purposes -->
-		<form action="http://foo.com">
+		<form action="target.html">
 		
 		<h2>1 - Let's Start Simple</h2>
 		
@@ -23,12 +23,14 @@
 				Click on the <strong>bold text</strong> to edit it.
 			</div>
 			<pre>
-    >>> $("#example1 strong").inlineEdit();
+    >>> $("#example1 .exampleBody strong").inlineEdit();
 			</pre>	
 			<p class="summary">
 				Simple: you can customize the bold text clicking on it.<br/>
 				Click <code>ENTER</code> key to accept the new value, or <code>ESC</code>
-				key to cancel editing and restoring original value.
+				key to cancel editing and restoring original value.<br/>
+				Remember that when the field loose focus, is like when you click <code>ENTER</code>:
+				the new value is accepted.
 			</p>
 		</div>
 
@@ -39,11 +41,11 @@
 				Click on the <strong>bold text</strong> or on the <em>italic</em> ones.<br/>
 			</div>
 			<pre>
-    >>> $("#example2 strong,#example2 em").inlineEdit();
-    ...     .inlineEdit({multiEditing: true});
+    >>> $("#example2 .exampleBody strong,#example2 .exampleBody em").inlineEdit();
 			</pre>
 			<p class="summary">
-				When editing a field you can click onto another field to stop editing the first and starting editing the second.<br/>
+				When editing a field you can click onto another field to stop editing the first and
+				starting editing the second.<br/>
 				By default you can edit only one field at time.
 			</p>
 		</div>
@@ -56,15 +58,103 @@
 				Click on the <strong>bold text</strong> again, but also the <em>italic</em> ones.
 			</div>
 			<pre>
-    >>> $("#example3 strong,#example3 em")
+    >>> $("#example3 .exampleBody strong,#example3 .exampleBody em")
     ...     .inlineEdit({multiEditing: true});
 			</pre>
 			<p class="summary">
 				You can begin editing more than a field, not forced to one.<br/>
-				For this, you simple need to use the <code>multiEditing</code> option to <code>true</code>.
+				For this, you simple need to use the <code>multiEditing</code> option to
+				<code>true</code>.<br/>
+				In this case if the field loose focus it will no accept the new value; you need
+				to go back to the field and press <code>ENTER</code>.
 			</p>
 		</div>
-		
+
+		<div id="example4" class="example">
+			<h2>Example 4: Force User To Accept Changes</h2>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> to edit. Click away to cancel what you've edited.
+			</div>
+			<pre>
+    >>> $("#example4 .exampleBody strong")
+    ...     .inlineEdit({acceptOnBlur: false});
+			</pre>
+			<p class="summary">
+				If you don't like that clicking away is seen like a &quot;take this new text&quot; action,
+				you can put the <code>acceptOnBlur</code> option to <code>false</code>.<br/>
+				Changing this will make the loose of focus like the pressure of the <code>ESC</code> key. 
+			</p>
+		</div>
+
+		<div id="example5" class="example">
+			<h2>Example 5: Change &quot;Abort&quot; Key</h2>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> to edit. <code>ESC</code> key will not cancel the action
+				anymore; instead use <code>BACKSPACE</code>.<br/>
+				Customize also the <em>italic</em> text, but no cancel key will works.
+			</div>
+			<pre>
+    >>>	$("#example5 .exampleBody strong")
+    ...     .inlineEdit({cancelKey: 8});
+    >>> $("#example5 .exampleBody em")
+    ...     .inlineEdit({cancelKey: null});
+			</pre>
+			<p class="summary">
+				Use the <code>cancelKey</code> options to change the key that abort editing from
+				<code>ESC</code> (code 27, the default) to what you want.<br/>
+				If you put it to <code>null</code> value, no key will work anymore for this action
+				(maybe the loose of focus will continue working, if you played with <code>acceptOnBlur</code>
+				value).
+			</p>
+		</div>
+
+		<div id="example6" class="example">
+			<h2>Example 6: Change &quot;Accept&quot; Key</h2>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> to edit. <code>ENTER</code> key will not accept changes
+				anymore (but <em>DO NOT PRESS IT</em>... see next example), instead use
+				<code>KEY-DOWN</code>.<br/>
+				Customize also the <em>italic</em> text, but to accept changes you need to click away from
+				the field, making it loosing focus.
+			</div>
+			<pre>
+    >>>	$("#example6 .exampleBody strong")
+    ...     .inlineEdit({acceptKey: 40});
+    >>> $("#example6 .exampleBody em")
+    ...     .inlineEdit({acceptKey: null});
+			</pre>
+			<p class="summary">
+				Use the <code>acceptKey</code> options to change the key that confirm changes from
+				<code>ENTER</code> (code 13, the default) to what you want.<br/>
+				If you put it to <code>null</code> value, no key will work anymore for this action
+				(maybe the loose of focus will continue working, based on your <code>acceptOnBlur</code>
+				value).
+			</p>
+		</div>
+
+		<div id="example6-1" class="example">
+			<h3>Example 6.1: Change &quot;Accept&quot; Key (But Still Prevent <code>ENTER</code>
+			Key From Changing Page)</h3>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> to edit. <code>ENTER</code> key will not accept changes
+				anymore (again, use <code>BACKSPACE</code>).
+			</div>
+			<pre>
+    >>>	$("#example6-1 .exampleBody strong")
+    ...     .inlineEdit({acceptKey: 40,
+    ...                  preventFormSubmission: true});
+			</pre>
+			<p class="summary">
+				In the example above (<em>now</em> you can try), even if the <code>ENTER</code> key will
+				no accept new values, pressing it during editing will submit the page form (so, loosing
+				the focus, this can in facts change the field value and accept it).<br/>
+				This is because, inside forms, the <code>ENTER</code> key has a special meaning. It will
+				submit the form.<br/>
+				So in this case you need to use also the <code>preventFormSubmission</code> parameter,
+				commonly not useful.
+			</p>
+		</div>
+
 		</form>
 		
     </body>

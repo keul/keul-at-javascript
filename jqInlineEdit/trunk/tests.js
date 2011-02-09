@@ -5,8 +5,19 @@
 
 $(document).ready(function() {
 	
-	$("#example1 strong").inlineEdit();
-	$("#example2 strong,#example2 em").inlineEdit();
-	$("#example3 strong,#example3 em").inlineEdit({multiEditing: true});
+	$("#example1 .exampleBody strong").inlineEdit();
+
+	$("#example2 .exampleBody strong,#example2 .exampleBody em").inlineEdit();
+
+	$("#example3 .exampleBody strong,#example3 .exampleBody em").inlineEdit({multiEditing: true});
+
+	$("#example4 .exampleBody strong").inlineEdit({acceptOnBlur: false});
+
+	$("#example5 .exampleBody strong").inlineEdit({cancelKey: 8});
+	$("#example5 .exampleBody em").inlineEdit({cancelKey: null});
+
+	$("#example6 .exampleBody strong").inlineEdit({acceptKey: 40});
+	$("#example6 .exampleBody em").inlineEdit({acceptKey: null});
+	$("#example6-1 .exampleBody strong").inlineEdit({acceptKey: 40, preventFormSubmission: true});
 	
 });

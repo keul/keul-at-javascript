@@ -11,7 +11,11 @@
 	$.fn.inlineEdit = function(ops) {
 		var options = {
 			event: 'click',
-			multiEditing: false
+			multiEditing: false,
+			cancelKey: 27,
+			acceptKey: 13,
+			acceptOnBlur: true,
+			preventFormSubmission: false
 		};
 		$.extend(options, ops || {});
 		
@@ -26,16 +30,24 @@
 				$editField.css('width', originalSize + 'px');
 				$this.empty().append($editField).unbind(options.event+'.InlineEdit');
 				$editField.keydown(function(event) {
-					if (event.which===27) {
+					if (options.preventFormSubmission && event.which===13) {
+						event.preventDefault();
+					}
+					if (event.which===options.cancelKey) {
 						event.preventDefault();
 						$editField.trigger('restore.InlineEdit');
-					} else if (event.which===13) {
+					} else if (event.which===options.acceptKey) {
 						event.preventDefault();
 						$editField.trigger('update.InlineEdit');
 					}
 				}).blur(function(event) {
-					if (!options.multiEditing)
-						$editField.trigger('update.InlineEdit');
+					if (!options.multiEditing) {
+						if (options.acceptOnBlur) {
+							$editField.trigger('update.InlineEdit');
+						} else {
+							$editField.trigger('restore.InlineEdit');
+						}
+					}
 				}).focus();
 				
 			}			
