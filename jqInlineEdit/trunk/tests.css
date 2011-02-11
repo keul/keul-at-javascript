@@ -15,6 +15,12 @@ h2 {
 	border-bottom: 1px solid blue;
 }
 
+code.api {
+	padding: 2px 4px;
+	background-color: black;
+	color: yellow;
+}
+
 .example {
 	padding: 0.3em;
 	border: 2px solid blue;
@@ -24,15 +30,19 @@ h2 {
 	background-color: white;
 }
 
+.subExample{
+	margin-left: 2em;
+}
+
 pre {
 	font-family: "Courier New", Courier, monospace;
 }
 
 .exampleBody {
 	padding: 0.3em 1em;
-	background-color: #ce8383;
+	background-color: #cea3a3;
 }
 
 .example .editField {
-	background-color: #ce8383;	
+	background-color: #cea3a3;	
 }

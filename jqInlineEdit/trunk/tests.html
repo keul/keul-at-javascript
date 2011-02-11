@@ -17,13 +17,13 @@
 		
 		<h2>1 - Let's Start Simple</h2>
 		
-		<div id="example1" class="example">
-			<h2>Example 1: The Most Basic Example In The World</h2>
+		<div id="example1-1" class="example">
+			<h2>Example 1.1: The Most Basic Example In The World</h2>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit it.
 			</div>
 			<pre>
-    >>> $("#example1 .exampleBody strong").inlineEdit();
+    >>> $("#example1-1 .exampleBody strong").inlineEdit();
 			</pre>	
 			<p class="summary">
 				Simple: you can customize the bold text clicking on it.<br/>
@@ -35,13 +35,13 @@
 		</div>
 
 
-		<div id="example2" class="example">
-			<h2>Example 2: More To Be Edited</h2>
+		<div id="example1-2" class="example">
+			<h2>Example 1.2: More To Be Edited</h2>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> or on the <em>italic</em> ones.<br/>
 			</div>
 			<pre>
-    >>> $("#example2 .exampleBody strong,#example2 .exampleBody em").inlineEdit();
+    >>> $("#example1-2 .exampleBody strong,#example2 .exampleBody em").inlineEdit();
 			</pre>
 			<p class="summary">
 				When editing a field you can click onto another field to stop editing the first and
@@ -52,106 +52,130 @@
 
 		<h2>2 - Somewhere Above Defaults</h2>
 
-		<div id="example3" class="example">
-			<h2>Example 3: Multiple Editing</h2>
+		<div id="example2-1" class="example">
+			<h2>Example 2.1: Multiple Editing</h2>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> again, but also the <em>italic</em> ones.
 			</div>
 			<pre>
-    >>> $("#example3 .exampleBody strong,#example3 .exampleBody em")
+    >>> $("#example2-1 .exampleBody strong,#example3 .exampleBody em")
     ...     .inlineEdit({multiEditing: true});
 			</pre>
 			<p class="summary">
 				You can begin editing more than a field, not forced to one.<br/>
-				For this, you simple need to use the <code>multiEditing</code> option to
+				For this, you simple need to use the <code class="api">multiEditing</code> option to
 				<code>true</code>.<br/>
 				In this case if the field loose focus it will no accept the new value; you need
 				to go back to the field and press <code>ENTER</code>.
 			</p>
 		</div>
 
-		<div id="example4" class="example">
-			<h2>Example 4: Force User To Accept Changes</h2>
+		<div id="example2-2" class="example">
+			<h2>Example 2.2: Force User To Accept Changes</h2>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit. Click away to cancel what you've edited.
 			</div>
 			<pre>
-    >>> $("#example4 .exampleBody strong")
+    >>> $("#example2-2 .exampleBody strong")
     ...     .inlineEdit({acceptOnBlur: false});
 			</pre>
 			<p class="summary">
 				If you don't like that clicking away is seen like a &quot;take this new text&quot; action,
-				you can put the <code>acceptOnBlur</code> option to <code>false</code>.<br/>
+				you can put the <code class="api">acceptOnBlur</code> option to <code>false</code>.<br/>
 				Changing this will make the loose of focus like the pressure of the <code>ESC</code> key. 
 			</p>
 		</div>
 
-		<div id="example5" class="example">
-			<h2>Example 5: Change &quot;Abort&quot; Key</h2>
+		<div id="example2-3" class="example">
+			<h2>Example 2.3: Change &quot;Abort&quot; Key</h2>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit. <code>ESC</code> key will not cancel the action
 				anymore; instead use <code>BACKSPACE</code>.<br/>
 				Customize also the <em>italic</em> text, but no cancel key will works.
 			</div>
 			<pre>
-    >>>	$("#example5 .exampleBody strong")
+    >>>	$("#example2-3 .exampleBody strong")
     ...     .inlineEdit({cancelKey: 8});
-    >>> $("#example5 .exampleBody em")
+    >>> $("#example2-3 .exampleBody em")
     ...     .inlineEdit({cancelKey: null});
 			</pre>
 			<p class="summary">
-				Use the <code>cancelKey</code> options to change the key that abort editing from
+				Use the <code class="api">cancelKey</code> options to change the key that abort editing from
 				<code>ESC</code> (code 27, the default) to what you want.<br/>
 				If you put it to <code>null</code> value, no key will work anymore for this action
-				(maybe the loose of focus will continue working, if you played with <code>acceptOnBlur</code>
+				(maybe the loose of focus will continue working, if you played with
+				<code class="api">acceptOnBlur</code>
 				value).
 			</p>
 		</div>
 
-		<div id="example6" class="example">
-			<h2>Example 6: Change &quot;Accept&quot; Key</h2>
+		<div id="example2-4" class="example preventMovingOn">
+			<h2>Example 2.4: Change &quot;Accept&quot; Key</h2>
 			<div class="exampleBody">
-				Click on the <strong>bold text</strong> to edit. <code>ENTER</code> key will not accept changes
-				anymore (but <em>DO NOT PRESS IT</em>... see next example), instead use
-				<code>KEY-DOWN</code>.<br/>
+				Click on the <strong>bold text</strong> to edit. The <code>ENTER</code> key will not accept
+				changes anymore (if you use it you will see a Javascript popup, but in a normal situation, when
+				inside a HTML <code>FORM</code> element, you will leave the current page),
+				instead use<code>KEY-DOWN</code>.<br/>
 				Customize also the <em>italic</em> text, but to accept changes you need to click away from
-				the field, making it loosing focus.
+				the field, making it loosing focus.<br/>
+				<strong>N.B.:</strong> if you use <code>ENTER</code> key, in the popup you'll see a field value
+				like if changes has been accepted, but remember that is not the key you pressed that accepted
+				the new value: when you submit a form (like you did pressing <code>ENTER</code>) the current
+				selected field is also loosing focus...
 			</div>
 			<pre>
-    >>>	$("#example6 .exampleBody strong")
+    >>>	$("#example2-4 .exampleBody strong")
     ...     .inlineEdit({acceptKey: 40});
-    >>> $("#example6 .exampleBody em")
+    >>> $("#example2-4 .exampleBody em")
     ...     .inlineEdit({acceptKey: null});
 			</pre>
 			<p class="summary">
-				Use the <code>acceptKey</code> options to change the key that confirm changes from
+				Use the <code class="api">acceptKey</code> options to change the key that confirm changes from
 				<code>ENTER</code> (code 13, the default) to what you want.<br/>
 				If you put it to <code>null</code> value, no key will work anymore for this action
-				(maybe the loose of focus will continue working, based on your <code>acceptOnBlur</code>
+				(maybe the loose of focus will continue working, based on your
+				<code class="api">acceptOnBlur</code>
 				value).
 			</p>
 		</div>
 
-		<div id="example6-1" class="example">
-			<h3>Example 6.1: Change &quot;Accept&quot; Key (But Still Prevent <code>ENTER</code>
+		<div id="example2-4-1" class="example subExample preventMovingOn">
+			<h3>Example 2.4.1: Change &quot;Accept&quot; Key (With Different Blur Handling)</h3>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> to edit. <code>ENTER</code> key will not accept changes
+				anymore (and in the popup you'll see the old value).
+			</div>
+			<pre>
+    >>>	$("#example2-4-1 .exampleBody strong")
+    ...     .inlineEdit({acceptKey: 40,
+    ...                  acceptOnBlur: false});
+			</pre>
+			<p class="summary">
+				Continuing example above: this time the <em>blur</em> action will not change the value so
+				you leave the page with old values.
+			</p>
+		</div>
+
+		<div id="example2-4-2" class="example subExample">
+			<h3>Example 2.4.2: Change &quot;Accept&quot; Key (This Time Preventing <code>ENTER</code>
 			Key From Changing Page)</h3>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit. <code>ENTER</code> key will not accept changes
-				anymore (again, use <code>BACKSPACE</code>).
+				anymore (again, use <code>KEY-DOWN</code>).
 			</div>
 			<pre>
-    >>>	$("#example6-1 .exampleBody strong")
+    >>>	$("#example2-4-2 .exampleBody strong")
     ...     .inlineEdit({acceptKey: 40,
     ...                  preventFormSubmission: true});
 			</pre>
 			<p class="summary">
-				In the example above (<em>now</em> you can try), even if the <code>ENTER</code> key will
-				no accept new values, pressing it during editing will submit the page form (so, loosing
-				the focus, this can in facts change the field value and accept it).<br/>
-				This is because, inside forms, the <code>ENTER</code> key has a special meaning. It will
-				submit the form.<br/>
-				So in this case you need to use also the <code>preventFormSubmission</code> parameter,
-				commonly not useful.
+				This set of examples shows you that inside <code>FORM</code> the <code>ENTER</code> key is
+				special and commonly will submit it.<br/>
+				Right now I prevent you moving on another page, but commonly how can you stop <code>ENTER</code>
+				doing this if you don't like it but still you don't want that <code>ENTER</code> accept
+				new values?<br/>
+				Simple: you need to use also the <code class="api">preventFormSubmission</code> parameter,
+				commonly not useful in any case except this. 
 			</p>
 		</div>
 
