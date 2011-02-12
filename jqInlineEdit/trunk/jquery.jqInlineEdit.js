@@ -15,14 +15,34 @@
 			cancelKey: 27,
 			acceptKey: 13,
 			acceptOnBlur: true,
-			preventFormSubmission: false
+			preventFormSubmission: false,
+			// Events
+			onInit: null,
+			beforeEdit: null
 		};
 		$.extend(options, ops || {});
 		
 		return this.each(function() {
 			var $this = $(this);
+
+			// The onInit parameter
+			if (options.onInit) {
+				var initResult = options.onInit.call($this);
+				if (initResult===false) {
+					return;
+				}
+			}
 			
 			var activateInlinEditHandler = function(event) {
+
+				// The beforeEdit parameter
+				if (options.beforeEdit) {
+					var beforeEditResult = options.beforeEdit.call($this);
+					if (beforeEditResult===false) {
+						return;
+					}
+				}
+
 				event.preventDefault();
 				$this.data('originalValue', $this.text());
 				var originalSize = $this.width();
@@ -49,7 +69,6 @@
 						}
 					}
 				}).focus();
-				
 			}			
 			$this.bind(options.event+'.InlineEdit', activateInlinEditHandler);
 

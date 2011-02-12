@@ -18,7 +18,7 @@
 		<h2>1 - Let's Start Simple</h2>
 		
 		<div id="example1-1" class="example">
-			<h2>Example 1.1: The Most Basic Example In The World</h2>
+			<h3>Example 1.1: The Most Basic Example In The World</h3>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit it.
 			</div>
@@ -36,12 +36,12 @@
 
 
 		<div id="example1-2" class="example">
-			<h2>Example 1.2: More To Be Edited</h2>
+			<h3>Example 1.2: More To Be Edited</h3>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> or on the <em>italic</em> ones.<br/>
 			</div>
 			<pre>
-    >>> $("#example1-2 .exampleBody strong,#example2 .exampleBody em").inlineEdit();
+    >>> $("#example1-2 .exampleBody strong,#example1-2 .exampleBody em").inlineEdit();
 			</pre>
 			<p class="summary">
 				When editing a field you can click onto another field to stop editing the first and
@@ -53,12 +53,12 @@
 		<h2>2 - Somewhere Above Defaults</h2>
 
 		<div id="example2-1" class="example">
-			<h2>Example 2.1: Multiple Editing</h2>
+			<h3>Example 2.1: Multiple Editing</h3>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> again, but also the <em>italic</em> ones.
 			</div>
 			<pre>
-    >>> $("#example2-1 .exampleBody strong,#example3 .exampleBody em")
+    >>> $("#example2-1 .exampleBody strong,#example2-1 .exampleBody em")
     ...     .inlineEdit({multiEditing: true});
 			</pre>
 			<p class="summary">
@@ -71,7 +71,7 @@
 		</div>
 
 		<div id="example2-2" class="example">
-			<h2>Example 2.2: Force User To Accept Changes</h2>
+			<h3>Example 2.2: Force User To Accept Changes</h3>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit. Click away to cancel what you've edited.
 			</div>
@@ -87,7 +87,7 @@
 		</div>
 
 		<div id="example2-3" class="example">
-			<h2>Example 2.3: Change &quot;Abort&quot; Key</h2>
+			<h3>Example 2.3: Change &quot;Abort&quot; Key</h3>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit. <code>ESC</code> key will not cancel the action
 				anymore; instead use <code>BACKSPACE</code>.<br/>
@@ -110,18 +110,18 @@
 		</div>
 
 		<div id="example2-4" class="example preventMovingOn">
-			<h2>Example 2.4: Change &quot;Accept&quot; Key</h2>
+			<h3>Example 2.4: Change &quot;Accept&quot; Key</h3>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit. The <code>ENTER</code> key will not accept
-				changes anymore (if you use it you will see a Javascript popup, but in a normal situation, when
-				inside a HTML <code>FORM</code> element, you will leave the current page),
-				instead use<code>KEY-DOWN</code>.<br/>
+				changes anymore (<strong>note</strong>that if you use it you will see a Javascript popup,
+				but in a normal situation, when pressing this key inside a HTML <code>FORM</code> element,
+				you will leave the current page), instead use<code>KEY-DOWN</code>.<br/>
 				Customize also the <em>italic</em> text, but to accept changes you need to click away from
 				the field, making it loosing focus.<br/>
 				<strong>N.B.:</strong> if you use <code>ENTER</code> key, in the popup you'll see a field value
 				like if changes has been accepted, but remember that is not the key you pressed that accepted
 				the new value: when you submit a form (like you did pressing <code>ENTER</code>) the current
-				selected field is also loosing focus...
+				selected field is also loosing focus! So: is the <em>blur</em> action that make magic.
 			</div>
 			<pre>
     >>>	$("#example2-4 .exampleBody strong")
@@ -140,7 +140,7 @@
 		</div>
 
 		<div id="example2-4-1" class="example subExample preventMovingOn">
-			<h3>Example 2.4.1: Change &quot;Accept&quot; Key (With Different Blur Handling)</h3>
+			<h4>Example 2.4.1: Change &quot;Accept&quot; Key (With Different Blur Handling)</h4>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit. <code>ENTER</code> key will not accept changes
 				anymore (and in the popup you'll see the old value).
@@ -157,8 +157,8 @@
 		</div>
 
 		<div id="example2-4-2" class="example subExample">
-			<h3>Example 2.4.2: Change &quot;Accept&quot; Key (This Time Preventing <code>ENTER</code>
-			Key From Changing Page)</h3>
+			<h4>Example 2.4.2: Change &quot;Accept&quot; Key (This Time Preventing <code>ENTER</code>
+			Key From Changing Page)</h4>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit. <code>ENTER</code> key will not accept changes
 				anymore (again, use <code>KEY-DOWN</code>).
@@ -178,6 +178,66 @@
 				commonly not useful in any case except this. 
 			</p>
 		</div>
+
+		<h2>3 - Doing Something Really Useful: Events</h2>
+
+		<div id="example3-1" class="example">
+			<h3>Example 3.1: Before Anything Else</h3>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> or the <em>italic text</em> for edit.
+				But you will not be able to edit the bold ones.<br/>
+				However... have you noted that those texts are bigger than normal?
+			</div>
+			<pre>
+    >>> $("#example3-1 .exampleBody strong,#example3-1 .exampleBody em")
+    ...     .inlineEdit({onInit: function() {
+    ...         this.css('font-size', '130%');
+    ...         return this.is('em');
+    ...     }});
+			</pre>
+			<p class="summary">
+				You can use the <code class="api">onInit</code> parameter for giving to the plugin something
+				to do... &quot;before all&quot;.<br/>
+				The function you passed is called on every element of the jQuery set. Inside this function the
+				<code>this</code> object is referred to the current jQuery context.<br/>
+				You can use this function only for doing something on those elements (like make the font
+				bigger?), but if <code class="api">onInit</code> will return a boolean
+				<code>false</code>, the jqInlineEdit mechanism will be stopped for this element. This means that
+				it will not be aditable.<br/>
+			</p>
+		</div>
+
+		<div id="example3-2" class="example">
+			<h3>Example 3.2: Before Editing</h3>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> or the <em>italic text</em> for edit.
+				You will be warned by a message every time you try to edit, but only the bold text will
+				be editable normally.
+			</div>
+			<pre>
+    >>> $("#example3-2 .exampleBody strong,#example3-2 .exampleBody em")
+    ...     .inlineEdit({beforeEdit: function() {
+    ...         alert('you are trying to edit this text: ' + this.text());
+    ...         return this.is('strong');
+    ...     }});
+			</pre>
+			<p class="summary">
+				The previous example shows you how to &quot;make something&quot; after you started the
+				inline edit procedure. When you rely onto <code class="api">onInit</code> you must know that it
+				is called once; returning <code>false</code> from it will stop one or more elements of the
+				jQuery set to be editable.<br/>
+				Now I want to show the <code class="api">beforeEdit</code> event, called when the edit procedure
+				starts from the user point of view, commonly when the user click on a target element.<br/>
+				The bigger difference is that: this event will be called <em>every time</em> the edit
+				procedure starts.<br/>
+				The <code>this</code> context inside the event is the current jQuery context (the element
+				you want to edit). Also, returning a boolean <code>false</code> from the function will stop
+				the edit procedure, but only this time. So, another click on the element will call the function
+				another time (and if this time the function doesn't return <code>false</code>, maybe you will
+				be able to edit your text. 
+			</p>
+		</div>
+
 
 		</form>
 		

@@ -7,9 +7,9 @@ $(document).ready(function() {
 		
 	$("#example1-1 .exampleBody strong").inlineEdit();
 
-	$("#example1-2 .exampleBody strong,#example2 .exampleBody em").inlineEdit();
+	$("#example1-2 .exampleBody strong,#example1-2 .exampleBody em").inlineEdit();
 
-	$("#example2-1 .exampleBody strong,#example3 .exampleBody em").inlineEdit({multiEditing: true});
+	$("#example2-1 .exampleBody strong,#example2-1 .exampleBody em").inlineEdit({multiEditing: true});
 
 	$("#example2-2 .exampleBody strong").inlineEdit({acceptOnBlur: false});
 
@@ -22,6 +22,16 @@ $(document).ready(function() {
 	$("#example2-4-1 .exampleBody strong").inlineEdit({acceptKey: 40, acceptOnBlur: false});
 
 	$("#example2-4-2 .exampleBody strong").inlineEdit({acceptKey: 40, preventFormSubmission: true});
+
+	$("#example3-1 .exampleBody strong,#example3-1 .exampleBody em").inlineEdit({onInit: function() {
+    	this.css('font-size', '130%');
+		return this.is('em');
+	}});
+
+	$("#example3-2 .exampleBody strong,#example3-2 .exampleBody em").inlineEdit({beforeEdit: function() {
+		alert('you are trying to edit this text: ' + this.text());
+		return this.is('strong');
+	}});
 
 	// Special example where is better to stop ENTER form SUBMIT
 	$(".preventMovingOn input").live('keydown', function(event) {
