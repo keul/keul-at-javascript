@@ -18,7 +18,8 @@
 			preventFormSubmission: false,
 			// Events
 			onInit: null,
-			beforeEdit: null
+			beforeEdit: null,
+			onInitField: null
 		};
 		$.extend(options, ops || {});
 		
@@ -48,6 +49,12 @@
 				var originalSize = $this.width();
 				var $editField = $('<input/>', {'type': 'text', 'class': 'editField'}).val($this.data('originalValue'));
 				$editField.css('width', originalSize + 'px');
+				if (options.onInitField) {
+					var initFieldResult = options.onInitField.call($editField);
+					if (initFieldResult===false) {
+						return;
+					}
+				}
 				$this.empty().append($editField).unbind(options.event+'.InlineEdit');
 				$editField.keydown(function(event) {
 					if (options.preventFormSubmission && event.which===13) {

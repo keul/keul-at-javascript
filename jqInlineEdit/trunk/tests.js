@@ -33,6 +33,22 @@ $(document).ready(function() {
 		return this.is('strong');
 	}});
 
+	var oversizeMe = function() {
+		this.css('font-size', '130%');
+	};
+    $("#example3-3 .exampleBody strong").inlineEdit({
+    	onInit: oversizeMe,
+    	onInitField: oversizeMe
+    });
+
+    $("#example3-3-1 .exampleBody strong").inlineEdit({
+		onInit: function() {this.css('font-size', '130%');},
+		onInitField: function() {return false;}
+	});
+
+	$("#example3-4 .exampleBody strong").inlineEdit({event: 'mouseover'});
+
+
 	// Special example where is better to stop ENTER form SUBMIT
 	$(".preventMovingOn input").live('keydown', function(event) {
 		if (event.which===13) {

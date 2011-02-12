@@ -212,7 +212,7 @@
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> or the <em>italic text</em> for edit.
 				You will be warned by a message every time you try to edit, but only the bold text will
-				be editable normally.
+				be editable after the message.
 			</div>
 			<pre>
     >>> $("#example3-2 .exampleBody strong,#example3-2 .exampleBody em")
@@ -222,19 +222,84 @@
     ...     }});
 			</pre>
 			<p class="summary">
-				The previous example shows you how to &quot;make something&quot; after you started the
-				inline edit procedure. When you rely onto <code class="api">onInit</code> you must know that it
-				is called once; returning <code>false</code> from it will stop one or more elements of the
-				jQuery set to be editable.<br/>
+				Go back to the previous example for a while. It shows you how to &quot;make something&quot;
+				after you started the inline edit procedure. When you rely onto
+				<code class="api">onInit</code> you must know that it is called once; returning
+				<code>false</code> from it will stop one or more elements of the jQuery set to be editable.<br/>
 				Now I want to show the <code class="api">beforeEdit</code> event, called when the edit procedure
 				starts from the user point of view, commonly when the user click on a target element.<br/>
 				The bigger difference is that: this event will be called <em>every time</em> the edit
 				procedure starts.<br/>
-				The <code>this</code> context inside the event is the current jQuery context (the element
+				The <code>this</code> object inside the event is the current jQuery context (the element
 				you want to edit). Also, returning a boolean <code>false</code> from the function will stop
 				the edit procedure, but only this time. So, another click on the element will call the function
 				another time (and if this time the function doesn't return <code>false</code>, maybe you will
 				be able to edit your text. 
+			</p>
+		</div>
+
+		<div id="example3-3" class="example">
+			<h3>Example 3.3: Before Anything Else (But We Are Talking Of The Editable Field)</h3>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> for edit it.
+				Like some example above the font size is a little smaller... but this time also the font size
+				inside the text field.
+			</div>
+			<pre>
+    >>> var oversizeMe = function() {
+    ...     this.css('font-size', '130%');
+	... };
+    >>> $("#example3-3 .exampleBody strong").inlineEdit({
+    ...         onInit: oversizeMe,
+    ...         onInitField: oversizeMe
+    ... });
+			</pre>
+			<p class="summary">
+				Another useful API you can use is the <code class="api">onInitField</code> options.
+				This is another event someway similar to the <code class="api">onInit</code> I
+				explained above.
+				The difference is that this new event is called on the text field you use for edit the text,
+				so later that <code class="api">onInit</code> execution.<br/>
+				When <code class="api">onInit</code> is called, the HTML inside the DOM element doesn't
+				contain the field yet.<br/>
+				In the example when I introduced <code class="api">onInit</code> event the text editable was
+				bigger, but when you start to edit it the text inside the editable field was normal.
+				In this example we use the same function for both events.<br/>
+				In the <code class="api">onInitField</code> function the <code>this</code> reference is the
+				jQuery context wrapping the text field. Again, returning <code>false</code> will abort the
+				procedure of update (see next example).
+			</p>
+		</div>
+
+		<div id="example3-3-1" class="example subExample">
+			<h3>Example 3.3.1: Are You Able To Edit The Editable Field?</h3>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> for edit it (sorry... not this time... you'll be
+				not able).
+			</div>
+			<pre>
+    >>> $("#example3-3-1 .exampleBody strong").inlineEdit({
+    ...     onInit: function() {this.css('font-size', '130%');},
+    ...     onInitField: function() {return false;}
+    ... });
+			</pre>
+			<p class="summary">
+				Like already said above, returning <code>false</code> from <code class="api">onInitField</code>
+				function will not make the field editable
+			</p>
+		</div>
+
+		<div id="example3-4" class="example">
+			<h3>Example 3.4: Now Customize The Real First Event You Have Worked With</h3>
+			<div class="exampleBody">
+				Move <strong>your</strong> mouse <strong>randomly</strong> on
+				<strong>all</strong> bold <strong>text</strong> inside <strong>this</strong> text.
+			</div>
+			<pre>
+    >>> $("#example3-4 .exampleBody strong").inlineEdit({event: 'mouseover'});
+			</pre>
+			<p class="summary">
+
 			</p>
 		</div>
 
