@@ -18,8 +18,9 @@
 			preventFormSubmission: false,
 			// Events
 			onInit: null,
+			onInitField: null,
 			beforeEdit: null,
-			onInitField: null
+			onEdit: null
 		};
 		$.extend(options, ops || {});
 		
@@ -91,6 +92,11 @@
 				$this.empty().text(newValue);
 				$this.removeData('originalValue');
 				$this.bind(options.event+'.InlineEdit', activateInlinEditHandler);
+
+				// Post edit event
+				if (options.onEdit) {
+					options.onEdit.call($this);
+				}
 			}
 			$this.bind('update.InlineEdit', updateInlineEditHandler);
 			

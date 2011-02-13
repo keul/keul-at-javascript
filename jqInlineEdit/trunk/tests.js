@@ -48,6 +48,12 @@ $(document).ready(function() {
 
 	$("#example3-4 .exampleBody strong").inlineEdit({event: 'mouseover'});
 
+	$("#example3-4-1 .exampleBody em").click(function() {$(this).parent().children('strong').trigger('custom')});
+	$("#example3-4-1 .exampleBody strong").inlineEdit({event: 'custom'});
+
+	$("#example3-5 .exampleBody strong").inlineEdit({onEdit: function() {
+		alert('todo');
+	}});
 
 	// Special example where is better to stop ENTER form SUBMIT
 	$(".preventMovingOn input").live('keydown', function(event) {

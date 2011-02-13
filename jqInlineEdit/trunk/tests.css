@@ -21,6 +21,10 @@ code.api {
 	color: yellow;
 }
 
+.jQueryApi {
+	font-family: monospace;
+}
+
 .example {
 	padding: 0.3em;
 	border: 2px solid blue;

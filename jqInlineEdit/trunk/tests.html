@@ -272,7 +272,7 @@
 		</div>
 
 		<div id="example3-3-1" class="example subExample">
-			<h3>Example 3.3.1: Are You Able To Edit The Editable Field?</h3>
+			<h4>Example 3.3.1: Are You Able To Edit The Editable Field?</h4>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> for edit it (sorry... not this time... you'll be
 				not able).
@@ -290,7 +290,7 @@
 		</div>
 
 		<div id="example3-4" class="example">
-			<h3>Example 3.4: Now Customize The Real First Event You Have Worked With</h3>
+			<h3>Example 3.4: Now Customize The First Event You Have Worked With</h3>
 			<div class="exampleBody">
 				Move <strong>your</strong> mouse <strong>randomly</strong> on
 				<strong>all</strong> bold <strong>text</strong> inside <strong>this</strong> text.
@@ -299,7 +299,49 @@
     >>> $("#example3-4 .exampleBody strong").inlineEdit({event: 'mouseover'});
 			</pre>
 			<p class="summary">
+				Right now I never talked of the action that starts the inline editing directly,
+				showing only one way: the mouse click. Instead also this default activation event can
+				be customized. You can use the <code class="api">event</code> parameter to change the
+				event that trigger the inline edit from &quot;click&quot; (the default) to
+				whatever you want.
+			</p>
+		</div>
 
+		<div id="example3-4-1" class="example subExample">
+			<h4>Example 3.4.1: ...Also With Custom Events</h4>
+			<div class="exampleBody">
+				Click on the <em>italic</em> text for customize the <strong>text</strong>.
+			</div>
+			<pre>
+    >>> $("#example3-4-1 .exampleBody em").click(function() {
+    ...     $(this).parent().children('strong').trigger('custom')});
+    >>> $("#example3-4-1 .exampleBody strong").inlineEdit({event: 'custom'});
+			</pre>
+			<p class="summary">
+				Remember that when you are in the jQuery world is very simple to rely also on
+				Javascript non-standard events.<br/>
+				The example above shows you that you can use <code class="api">event</code>
+				parameter with a non-standard event that you can easilly raise using jQuery
+				<a class="jQueryApi" rel="external" href="http://api.jquery.com/trigger">trigger()</a> method.
+			</p>
+		</div>
+
+		<div id="example3-5" class="example">
+			<h3>Example 3.5: ...Also With Custom Events</h3>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> to edit it and see transformed to upper case.
+			</div>
+			<pre>
+    >>> $("#example3-4-1 .exampleBody em").click(function() {
+    ...     $(this).parent().children('strong').trigger('custom')});
+    >>> $("#example3-4-1 .exampleBody strong").inlineEdit({event: 'custom'});
+			</pre>
+			<p class="summary">
+				Remember that when you are in the jQuery world is very simple to rely also on
+				Javascript non-standard events.<br/>
+				The example above shows you that you can use <code class="api">event</code>
+				parameter with a non-standard event that you can easilly raise using jQuery
+				<a class="jQueryApi" rel="external" href="http://api.jquery.com/trigger">trigger()</a> method.
 			</p>
 		</div>
 
