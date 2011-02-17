@@ -26,7 +26,7 @@
 			// validation
 			validate: null,
 			// Styles
-			editableClass: null
+			editableClass: 'inlineEditableElement'
 		};
 		$.extend(options, ops || {});
 		
@@ -127,7 +127,6 @@
 				}
 			}
 			$this.bind('update.InlineEdit', updateInlineEditHandler);
-			
 			
 			$this.bind('stop.InlineEdit', function(event) {
 				var elem = $(this); 
