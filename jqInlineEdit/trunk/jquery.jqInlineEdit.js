@@ -20,7 +20,10 @@
 			onInit: null,
 			onInitField: null,
 			beforeEdit: null,
-			onEdit: null
+			onEdit: null,
+			onCancel: null,
+			// ***
+			validate: null
 		};
 		$.extend(options, ops || {});
 		
@@ -81,14 +84,30 @@
 			$this.bind(options.event+'.InlineEdit', activateInlinEditHandler);
 
 			var abortInlineEditHandler = function(event) {
+				var discardedText = $(event.target).val();
 				$this.empty().text($this.data('originalValue'));
 				$this.removeData('originalValue');
 				$this.bind(options.event+'.InlineEdit', activateInlinEditHandler);
+				if (options.onCancel) {
+					options.onCancel.call($this, discardedText);
+				}
 			}
 			$this.bind('restore.InlineEdit', abortInlineEditHandler);
 
 			var updateInlineEditHandler = function(event) {
 				var newValue = $(event.target).val();
+				if (options.validate) {
+					if (typeof(options.validate)==='function') {
+						var validateResult = options.validate.call($this, newValue);
+						if (validateResult===false) {
+							$this.trigger('restore.InlineEdit');
+							return;
+						}
+					} else if (!options.validate.test(newValue)) {
+						$this.trigger('restore.InlineEdit');
+						return;
+					}
+				}
 				$this.empty().text(newValue);
 				$this.removeData('originalValue');
 				$this.bind(options.event+'.InlineEdit', activateInlinEditHandler);

@@ -62,11 +62,11 @@
     ...     .inlineEdit({multiEditing: true});
 			</pre>
 			<p class="summary">
-				You can begin editing more than a field, not forced to one.<br/>
+				You can start editing more than a field, not forced to one.<br/>
 				For this, you simple need to use the <code class="api">multiEditing</code> option to
 				<code>true</code>.<br/>
-				In this case if the field loose focus it will no accept the new value; you need
-				to go back to the field and press <code>ENTER</code>.
+				In this case if the field loose focus it will no accept the new value nor it discard it;
+				you need to go back to the field and press <code>ENTER</code>.
 			</p>
 		</div>
 
@@ -80,7 +80,7 @@
     ...     .inlineEdit({acceptOnBlur: false});
 			</pre>
 			<p class="summary">
-				If you don't like that clicking away is seen like a &quot;take this new text&quot; action,
+				If you don't like that clicking away is intended like a &quot;take this new text&quot; action,
 				you can put the <code class="api">acceptOnBlur</code> option to <code>false</code>.<br/>
 				Changing this will make the loose of focus like the pressure of the <code>ESC</code> key. 
 			</p>
@@ -103,7 +103,7 @@
 				Use the <code class="api">cancelKey</code> options to change the key that abort editing from
 				<code>ESC</code> (code 27, the default) to what you want.<br/>
 				If you put it to <code>null</code> value, no key will work anymore for this action
-				(maybe the loose of focus will continue working, if you played with
+				(maybe the loose of focus will continue working, if you  not played with
 				<code class="api">acceptOnBlur</code>
 				value).
 			</p>
@@ -113,15 +113,11 @@
 			<h3>Example 2.4: Change &quot;Accept&quot; Key</h3>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit. The <code>ENTER</code> key will not accept
-				changes anymore (<strong>note</strong>that if you use it you will see a Javascript popup,
+				changes anymore (<strong>note</strong> that if you use it you will see a Javascript popup,
 				but in a normal situation, when pressing this key inside a HTML <code>FORM</code> element,
-				you will leave the current page), instead use<code>KEY-DOWN</code>.<br/>
+				you will leave the current page), instead use <code>KEY-DOWN</code>.<br/>
 				Customize also the <em>italic</em> text, but to accept changes you need to click away from
-				the field, making it loosing focus.<br/>
-				<strong>N.B.:</strong> if you use <code>ENTER</code> key, in the popup you'll see a field value
-				like if changes has been accepted, but remember that is not the key you pressed that accepted
-				the new value: when you submit a form (like you did pressing <code>ENTER</code>) the current
-				selected field is also loosing focus! So: is the <em>blur</em> action that make magic.
+				the field, making it loosing focus.
 			</div>
 			<pre>
     >>>	$("#example2-4 .exampleBody strong")
@@ -134,8 +130,12 @@
 				<code>ENTER</code> (code 13, the default) to what you want.<br/>
 				If you put it to <code>null</code> value, no key will work anymore for this action
 				(maybe the loose of focus will continue working, based on your
-				<code class="api">acceptOnBlur</code>
-				value).
+				<code class="api">acceptOnBlur</code> value).<br/>
+				<strong>N.B.:</strong> if you use <code>ENTER</code> key, while the alert message is displayed,
+				you'll see the new text like if changes has been accepted, but remember that is not the key you
+				pressed that accepted the new value: when you submit a form (like you did pressing
+				<code>ENTER</code>) the current selected field is also loosing focus! So: is the
+				<em>blur</em> action that make magic.
 			</p>
 		</div>
 
@@ -171,15 +171,15 @@
 			<p class="summary">
 				This set of examples shows you that inside <code>FORM</code> the <code>ENTER</code> key is
 				special and commonly will submit it.<br/>
-				Right now I prevent you moving on another page, but commonly how can you stop <code>ENTER</code>
-				doing this if you don't like it but still you don't want that <code>ENTER</code> accept
-				new values?<br/>
+				Right now I prevent you from moving on another page, but commonly how can you stop
+				<code>ENTER</code> doing this if you don't like it but still you don't want that
+				<code>ENTER</code> accept new values?<br/>
 				Simple: you need to use also the <code class="api">preventFormSubmission</code> parameter,
-				commonly not useful in any case except this. 
+				a specific option for this need. 
 			</p>
 		</div>
 
-		<h2>3 - Doing Something Really Useful: Events</h2>
+		<h2>3 - Let's Start Beeing Useful: Events</h2>
 
 		<div id="example3-1" class="example">
 			<h3>Example 3.1: Before Anything Else</h3>
@@ -225,16 +225,17 @@
 				Go back to the previous example for a while. It shows you how to &quot;make something&quot;
 				after you started the inline edit procedure. When you rely onto
 				<code class="api">onInit</code> you must know that it is called once; returning
-				<code>false</code> from it will stop one or more elements of the jQuery set to be editable.<br/>
+				<code>false</code> from it will stop one or more elements of the jQuery set from beeing
+				editable.<br/>
 				Now I want to show the <code class="api">beforeEdit</code> event, called when the edit procedure
 				starts from the user point of view, commonly when the user click on a target element.<br/>
 				The bigger difference is that: this event will be called <em>every time</em> the edit
 				procedure starts.<br/>
-				The <code>this</code> object inside the event is the current jQuery context (the element
-				you want to edit). Also, returning a boolean <code>false</code> from the function will stop
-				the edit procedure, but only this time. So, another click on the element will call the function
-				another time (and if this time the function doesn't return <code>false</code>, maybe you will
-				be able to edit your text. 
+				The <code>this</code> reference inside the event function is the current jQuery context
+				(the element you want to edit). Also, returning a boolean <code>false</code>
+				from the function will stop the edit procedure, but only this time.
+				So, another click on the element will call the function another time (and if this time the
+				function doesn't return <code>false</code>, maybe you will be able to edit your text. 
 			</p>
 		</div>
 
@@ -259,7 +260,7 @@
 				This is another event someway similar to the <code class="api">onInit</code> I
 				explained above.
 				The difference is that this new event is called on the text field you use for edit the text,
-				so later that <code class="api">onInit</code> execution.<br/>
+				so later than <code class="api">onInit</code> execution.<br/>
 				When <code class="api">onInit</code> is called, the HTML inside the DOM element doesn't
 				contain the field yet.<br/>
 				In the example when I introduced <code class="api">onInit</code> event the text editable was
@@ -285,7 +286,10 @@
 			</pre>
 			<p class="summary">
 				Like already said above, returning <code>false</code> from <code class="api">onInitField</code>
-				function will not make the field editable
+				function will not make the field editable. To be more precise: the event function is called
+				in the context of the editable field, so after this has been created, but before it is
+				attached to the document DOM. So returning <code>false</code> will never make the field
+				appear in you page.
 			</p>
 		</div>
 
@@ -305,6 +309,10 @@
 				event that trigger the inline edit from &quot;click&quot; (the default) to
 				whatever you want.
 			</p>
+			<p class="devNote">
+				When other fields take focus, seems that the blur event on field tah behave focus is not
+				called. Investigate why.
+			</p>
 		</div>
 
 		<div id="example3-4-1" class="example subExample">
@@ -319,32 +327,108 @@
 			</pre>
 			<p class="summary">
 				Remember that when you are in the jQuery world is very simple to rely also on
-				Javascript non-standard events.<br/>
+				non-standard Javascript events.<br/>
 				The example above shows you that you can use <code class="api">event</code>
 				parameter with a non-standard event that you can easilly raise using jQuery
-				<a class="jQueryApi" rel="external" href="http://api.jquery.com/trigger">trigger()</a> method.
+				<a class="jQueryAPI" rel="external" href="http://api.jquery.com/trigger">trigger()</a> method.
 			</p>
 		</div>
 
 		<div id="example3-5" class="example">
-			<h3>Example 3.5: ...Also With Custom Events</h3>
+			<h3>Example 3.5: More Interesting: Do Something &quot;After&quot;</h3>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit it and see transformed to upper case.
 			</div>
 			<pre>
-    >>> $("#example3-4-1 .exampleBody em").click(function() {
-    ...     $(this).parent().children('strong').trigger('custom')});
-    >>> $("#example3-4-1 .exampleBody strong").inlineEdit({event: 'custom'});
+    >>> $("#example3-5 .exampleBody strong").inlineEdit({onEdit: function() {
+    ...     this.text(this.text().toUpperCase());
+    ... }});
 			</pre>
 			<p class="summary">
-				Remember that when you are in the jQuery world is very simple to rely also on
-				Javascript non-standard events.<br/>
-				The example above shows you that you can use <code class="api">event</code>
-				parameter with a non-standard event that you can easilly raise using jQuery
-				<a class="jQueryApi" rel="external" href="http://api.jquery.com/trigger">trigger()</a> method.
+				I don't want to take it longer. Now you are customized you text, but you are able to
+				be warned of thi update, and make something after.<br/>
+				The <code class="api">onEdit</code> function is called when the text has been changes.
+				Inside it you can use the <code>this</code> reference to get the edited node.<br/>
+				This time what you return from the function doesn't matter. The page has been already
+				modified.
 			</p>
 		</div>
 
+		<div id="example3-6" class="example">
+			<h3>Example 3.6: Do Something Also If You Change Idea</h3>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> to edit. Nothing special, but if you abort the editing
+				with <code>ESC</code> key, you'll see an alert with the discarded text.
+			</div>
+			<pre>
+    >>> $("#example3-6 .exampleBody strong").inlineEdit({onCancel: function(discardedText) {
+    ...     alert('The node text is still "'+this.text()+'" while the discarded text is "'+discardedText+'".');
+    ... }});
+			</pre>
+			<p class="summary">
+				Similar to the <code class="api">onEdit</code> event, you can pass the
+				<code class="api">onCancel</code> parameter, to invoke a custom function that will be called
+				when the user want to discard changes. Use <code>this</code> for a reference to the node you
+				were editing.<br/>
+				Again: like the <code class="api">onEdit</code>, the returning value is ignored, but this time
+				the function can have a parameter: <code class="apiParameter">discardedText</code>. This is the
+				text that the user entered but that will be lost because he cancel the action.<br>/
+			</p>
+		</div>
+
+		<h2> Validation </h2>
+
+		<div id="example4-1" class="example">
+			<h3>Example 4.1: Validation (In General)</h3>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> to edit it. You <em>must</em> modify the text copying
+				exactly (case sensitive) the text you find in the italic text that follow:
+				<em>The Cat is on the Table</em>.
+			</div>
+			<pre>
+    >>> $("#example4-1 .exampleBody strong").inlineEdit({validate: function(newValue) {
+    ...     var italicText = this.nextAll('em:eq(1)').text();
+    ...     if (newValue!==italicText) {
+    ...         return false;
+    ...     }
+    ... }});
+			</pre>
+			<p class="summary">
+				The <code class="api">validate</code> parameter is really important. It can be used to validate your
+				input automatically after submission.<br/>
+				In its general version, <code class="api">validate</code> is a function called before the user changes
+				are applied.<br/>
+				Inside the function, the <code>this</code> reference if the current jQuery content.
+				The function can have a <code class="apiParameter">newValue</code> parameter that is the new value that
+				the user want to submit to validation.<br/>
+				If the function return a boolean <code>false</code>, the plugin cancel the action.<br/>
+			</p>
+		</div>
+
+		<div id="example4-2" class="example">
+			<h3>Example 4.2: RegExp Validation Shortcut</h3>
+			<div class="exampleBody">
+				Click on the <strong>bold text</strong> to edit it. You <em>must</em> change the text with
+				a number, or you changes will be discarded.
+			</div>
+			<pre>
+    >>> $("#example4-2 .exampleBody strong").inlineEdit(
+    ...     {validate: /(^-?\d\d*\.\d*$)|(^-?\d\d*$)|(^-?\.\d\d*$)/}
+    ... );
+			</pre>
+			<p class="summary">
+				This example want to show you a shortcut. One of the most useful way to perform validation
+				based only on the text value is the use of
+				<a rel="external" class="jsAPI"
+				href="http://www.w3schools.com/jsref/jsref_obj_regexp.asp">RegExp Javascript object</a>.<br/>
+				If you use as <code class="api">validate</code> parameter a <code>RegExp</code> object,
+				it will be automatically tested with the new value typed by the user.
+				If the results is <code>false</code> then no changes will be applied.<br/>
+				Please note that this version of the use of <code class="api">validate</code> is a shortcut.
+				You can reach the same behaviour using <code class="api">validate</code> as a function that
+				test the new value inside it with a <code>RegExp</code>.
+			</p>
+		</div>
 
 		</form>
 		

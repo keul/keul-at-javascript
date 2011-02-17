@@ -21,7 +21,13 @@ code.api {
 	color: yellow;
 }
 
-.jQueryApi {
+code.apiParameter {
+	padding: 2px 4px;
+	background-color: #9bc9ff;
+}
+
+.jQueryAPI,
+.jsAPI {
 	font-family: monospace;
 }
 
@@ -49,4 +55,9 @@ pre {
 
 .example .editField {
 	background-color: #cea3a3;	
+}
+
+.devNote {
+	background-color: #3bff9e;
+	padding: 0.3em 1em;
 }

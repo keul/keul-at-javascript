@@ -52,13 +52,27 @@ $(document).ready(function() {
 	$("#example3-4-1 .exampleBody strong").inlineEdit({event: 'custom'});
 
 	$("#example3-5 .exampleBody strong").inlineEdit({onEdit: function() {
-		alert('todo');
+		this.text(this.text().toUpperCase());
 	}});
+
+	$("#example3-6 .exampleBody strong").inlineEdit({onCancel: function(discardedText) {
+		alert('The node text is still "'+this.text()+'" while the discarded text is "'+discardedText+'".');
+	}});
+
+	$("#example4-1 .exampleBody strong").inlineEdit({validate: function(newValue) {
+		var italicText = this.nextAll('em:eq(1)').text();
+		if (newValue!==italicText) {
+			return false;
+		} 
+	}});
+
+	$("#example4-2 .exampleBody strong").inlineEdit({validate: /(^-?\d\d*\.\d*$)|(^-?\d\d*$)|(^-?\.\d\d*$)/});
+
 
 	// Special example where is better to stop ENTER form SUBMIT
 	$(".preventMovingOn input").live('keydown', function(event) {
 		if (event.which===13) {
-			alert("You are leaving this page due to ENTER pressure.\nThe field value is:\n" + $(this).val());
+			alert("You are leaving this page due to ENTER pressure.");
 		}
 		return true;
 	})
