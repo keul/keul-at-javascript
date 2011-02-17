@@ -58,15 +58,27 @@ $(document).ready(function() {
 	$("#example3-6 .exampleBody strong").inlineEdit({onCancel: function(discardedText) {
 		alert('The node text is still "'+this.text()+'" while the discarded text is "'+discardedText+'".');
 	}});
+	
+	var boldSet = $("#example4-1 .exampleBody strong");
+	boldSet.inlineEdit({onEdit: function() {
+		$(boldSet.get(0)).stopInlineEdit();
+	}});
 
-	$("#example4-1 .exampleBody strong").inlineEdit({validate: function(newValue) {
+	$("#example5-1 .exampleBody strong").inlineEdit({validate: function(newValue) {
 		var italicText = this.nextAll('em:eq(1)').text();
 		if (newValue!==italicText) {
 			return false;
 		} 
 	}});
 
-	$("#example4-2 .exampleBody strong").inlineEdit({validate: /(^-?\d\d*\.\d*$)|(^-?\d\d*$)|(^-?\.\d\d*$)/});
+	$("#example5-2 .exampleBody strong").inlineEdit({validate: /(^-?\d\d*\.\d*$)|(^-?\d\d*$)|(^-?\.\d\d*$)/});
+
+	$("#example6-1 .exampleBody strong:first,#example6-1 .exampleBody span").inlineEdit({
+		editableClass: 'ImEditable'
+	});
+	$("#example6-1-1 .exampleBody strong").inlineEdit({
+		editableClass: 'ImEditable ImReallyEditable fooClass'
+	});
 
 
 	// Special example where is better to stop ENTER form SUBMIT

@@ -61,3 +61,11 @@ pre {
 	background-color: #3bff9e;
 	padding: 0.3em 1em;
 }
+
+.ImEditable {
+	border-bottom: 2px dashed;
+	border-bottom-color: #3bff9e;
+}
+.ImReallyEditable {
+	text-decoration: line-through;
+}

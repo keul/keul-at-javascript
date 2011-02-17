@@ -10,20 +10,23 @@
 (function($) {
 	$.fn.inlineEdit = function(ops) {
 		var options = {
-			event: 'click',
 			multiEditing: false,
+			// keys
 			cancelKey: 27,
 			acceptKey: 13,
 			acceptOnBlur: true,
 			preventFormSubmission: false,
 			// Events
+			event: 'click',
 			onInit: null,
 			onInitField: null,
 			beforeEdit: null,
 			onEdit: null,
 			onCancel: null,
-			// ***
-			validate: null
+			// validation
+			validate: null,
+			// Styles
+			editableClass: null
 		};
 		$.extend(options, ops || {});
 		
@@ -36,6 +39,10 @@
 				if (initResult===false) {
 					return;
 				}
+			}
+			
+			if (options.editableClass) {
+				$this.addClass(options.editableClass);
 			}
 			
 			var activateInlinEditHandler = function(event) {
@@ -53,12 +60,14 @@
 				var originalSize = $this.width();
 				var $editField = $('<input/>', {'type': 'text', 'class': 'editField'}).val($this.data('originalValue'));
 				$editField.css('width', originalSize + 'px');
+
 				if (options.onInitField) {
 					var initFieldResult = options.onInitField.call($editField);
 					if (initFieldResult===false) {
 						return;
 					}
 				}
+
 				$this.empty().append($editField).unbind(options.event+'.InlineEdit');
 				$editField.keydown(function(event) {
 					if (options.preventFormSubmission && event.which===13) {
@@ -120,7 +129,24 @@
 			$this.bind('update.InlineEdit', updateInlineEditHandler);
 			
 			
+			$this.bind('stop.InlineEdit', function(event) {
+				var elem = $(this); 
+				elem.unbind('.InlineEdit');
+				elem.removeData('originalValue');
+				if (options.editableClass) {
+					elem.removeClass(options.editableClass);	
+				}
+				
+			});
 		});
 	};
+	
+	/**
+	 * No more able to edit elements after this call
+	 */
+	$.fn.stopInlineEdit = function(){
+		return this.trigger('stop.InlineEdit');
+	}
+	
 })(jQuery);
 

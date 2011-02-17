@@ -3,17 +3,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>jqInlineEdit jQuery Plugin - tests</title>
+        <title>jqInlineEdit jQuery Plugin - Live Demo &amp; Documentation</title>
 		<link rel="stylesheet" type="text/css" media="all" href="tests.css" />
 		<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
 		<script type="text/javascript" src="jquery.jqInlineEdit.js"></script>
 		<script type="text/javascript" src="tests.js"></script>
     </head>
     <body>
-        <h1>jqInlineEdit jQuery Plugin - tests</h1>
+        <h1>jqInlineEdit jQuery Plugin - Live Demo &amp; Documentation</h1>
 		
 		<!-- We need a form for many reasons and test purposes -->
 		<form action="target.html">
+
+		<h2>0 - Introduction</h2>
+		
+		...TODO...
 		
 		<h2>1 - Let's Start Simple</h2>
 		
@@ -33,7 +37,6 @@
 				the new value is accepted.
 			</p>
 		</div>
-
 
 		<div id="example1-2" class="example">
 			<h3>Example 1.2: More To Be Edited</h3>
@@ -376,17 +379,41 @@
 			</p>
 		</div>
 
+		<h2> Stopping Inline Edit </h2>
+		
+		<div id="example4-1" class="example">
+			<h3>Example 4.1: Editable No More</h3>
+			<div class="exampleBody">
+				Click on all <strong>bold text</strong> that <strong>you see there</strong>.
+				After that ther first bold text will not be editable anymore.
+			</div>
+			<pre>
+    >>> var boldSet = $("#example4-1 .exampleBody strong");
+    >>> boldSet.inlineEdit({onEdit: function() {
+    ...    $(boldSet.get(0)).stopInlineEdit();
+    ... }});
+			</pre>
+			<p class="summary">
+				In every moment you want, you can choose to stop elemens from being editable.
+				You only need to construct a jQuery set (not required that this set in the same you used
+				for beginning the inline edit procedure... maybe you want to use only a subset?)
+				and call on it the <code class="api">stopInlineEdit</code> method.<br/>
+				After this call all stuff that made elements in the set editable, are removed (data,
+				events and so on). If you change idea... let's start from scratch!
+			</p>
+		</div>
+
 		<h2> Validation </h2>
 
-		<div id="example4-1" class="example">
-			<h3>Example 4.1: Validation (In General)</h3>
+		<div id="example5-1" class="example">
+			<h3>Example 5.1: Validation (In General)</h3>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit it. You <em>must</em> modify the text copying
 				exactly (case sensitive) the text you find in the italic text that follow:
 				<em>The Cat is on the Table</em>.
 			</div>
 			<pre>
-    >>> $("#example4-1 .exampleBody strong").inlineEdit({validate: function(newValue) {
+    >>> $("#example5-1 .exampleBody strong").inlineEdit({validate: function(newValue) {
     ...     var italicText = this.nextAll('em:eq(1)').text();
     ...     if (newValue!==italicText) {
     ...         return false;
@@ -405,14 +432,14 @@
 			</p>
 		</div>
 
-		<div id="example4-2" class="example">
-			<h3>Example 4.2: RegExp Validation Shortcut</h3>
+		<div id="example5-2" class="example">
+			<h3>Example 5.2: RegExp Validation Shortcut</h3>
 			<div class="exampleBody">
 				Click on the <strong>bold text</strong> to edit it. You <em>must</em> change the text with
 				a number, or you changes will be discarded.
 			</div>
 			<pre>
-    >>> $("#example4-2 .exampleBody strong").inlineEdit(
+    >>> $("#example5-2 .exampleBody strong").inlineEdit(
     ...     {validate: /(^-?\d\d*\.\d*$)|(^-?\d\d*$)|(^-?\.\d\d*$)/}
     ... );
 			</pre>
@@ -429,6 +456,46 @@
 				test the new value inside it with a <code>RegExp</code>.
 			</p>
 		</div>
+
+		<h2> A Bit Of Style </h2>
+
+		<div id="example6-1" class="example">
+			<h3>Example 6.1: Styles For All Editable Element</h3>
+			<div class="exampleBody">
+				Click on the <strong>first bold text</strong> if you like. The <strong>second one</strong>
+				instead is not editable. Note the special style applied to the editable text... and thank
+				to this style you are able to see that <span>there is another editable text</span> (I said:
+				not the second bold text!).
+			</div>
+			<pre>
+    >>> $("#example6-1 .exampleBody strong:first,#example6-1 .exampleBody span").inlineEdit({
+    ...     editableClass: 'ImEditable'
+    ... });
+			</pre>
+			<p class="summary">
+				Editable elements in a set can be very heterogeneous and for sure you must think about
+				the user accessibility. You need to mark in some special way the editable areas.
+				The <code class="api">editableClass</code> parameter is a class name(s) to be applied to
+				all editable elements in the set.
+			</p>
+		</div>
+		
+		<div id="example6-1-1" class="example">
+			<h4>Example 6.1.1: More Styles For All Editable Element</h3>
+			<div class="exampleBody">
+				The <strong>bold text</strong> there is editable, with two classes applied.
+			</div>
+			<pre>
+    >>> $("#example6-1-1 .exampleBody strong").inlineEdit({
+    ...     editableClass: 'ImEditable ImReallyEditable fooClass'
+    ... });
+			</pre>
+			<p class="summary">
+				You can give multiple class to the <code class="api">editableClass</code> parameter,
+				putting a space for divide them.
+			</p>
+		</div>
+
 
 		</form>
 		
