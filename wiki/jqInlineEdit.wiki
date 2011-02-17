@@ -2,12 +2,8 @@
 
 = Introduction =
 
-Add your content here.
-
+An *inline edit* plugin that handle changes from the user to your HTML page, and perform action the this happens.
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+See a complete help an [http://keul-at-javascript.googlecode.com/svn/jqInlineEdit/trunk/tests.html live demo]
