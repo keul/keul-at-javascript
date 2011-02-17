@@ -73,11 +73,12 @@ $(document).ready(function() {
 
 	$("#example5-2 .exampleBody strong").inlineEdit({validate: /(^-?\d\d*\.\d*$)|(^-?\d\d*$)|(^-?\.\d\d*$)/});
 
-	$("#example6-1 .exampleBody strong:first,#example6-1 .exampleBody span").inlineEdit({
+	// 6.1 is a non-example
+	$("#example6-2 .exampleBody strong:first,#example6-2 .exampleBody span").inlineEdit({
 		editableClass: 'ImEditable'
 	});
-	$("#example6-1-1 .exampleBody strong").inlineEdit({
-		editableClass: 'ImEditable ImReallyEditable fooClass'
+	$("#example6-2-1 .exampleBody strong").inlineEdit({
+		editableClass: 'inlineEditableElement ImEditable ImReallyEditable fooClass'
 	});
 
 

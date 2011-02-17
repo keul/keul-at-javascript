@@ -460,15 +460,29 @@
 		<h2> A Bit Of Style </h2>
 
 		<div id="example6-1" class="example">
-			<h3>Example 6.1: Styles For All Editable Element</h3>
+			<h3>Example 6.1: Style For All Editable Element</h3>
+			<div class="exampleBody">
+				No example for this... or better: <em>every</em> test you seen in this page
+				is an example for this. Have you noted that all editable elements, when the mouse
+				move on them, are changing the cursor to a pointer?
+			</div>
+			<p class="summary">
+				When you enable the inline edit, automatically you are applying a new CSS class
+				named &quot;<em>inlineEditableElement</em>&quot; to them.<br/>
+				This is the default value for the <code class="api">editableClass</code> parameter.
+			</p>
+		</div>
+
+		<div id="example6-2" class="example">
+			<h3>Example 6.2: More Styles For All Editable Element</h3>
 			<div class="exampleBody">
 				Click on the <strong>first bold text</strong> if you like. The <strong>second one</strong>
-				instead is not editable. Note the special style applied to the editable text... and thank
+				instead is not editable. Note the special style applied to the editable text... and thanks
 				to this style you are able to see that <span>there is another editable text</span> (I said:
 				not the second bold text!).
 			</div>
 			<pre>
-    >>> $("#example6-1 .exampleBody strong:first,#example6-1 .exampleBody span").inlineEdit({
+    >>> $("#example6-2 .exampleBody strong:first,#example6-2 .exampleBody span").inlineEdit({
     ...     editableClass: 'ImEditable'
     ... });
 			</pre>
@@ -476,26 +490,32 @@
 				Editable elements in a set can be very heterogeneous and for sure you must think about
 				the user accessibility. You need to mark in some special way the editable areas.
 				The <code class="api">editableClass</code> parameter is a class name(s) to be applied to
-				all editable elements in the set.
+				all editable elements in the set.<br/>
+				Note that in this example we are applying only the &quot;<em>ImEditable</em>&quot;, not the
+				 &quot;<em>inlineEditableElement</em>&quot;. Continue reading for more info about this.
 			</p>
 		</div>
 		
-		<div id="example6-1-1" class="example">
-			<h4>Example 6.1.1: More Styles For All Editable Element</h3>
+		<div id="example6-2-1" class="example subExample">
+			<h4>Example 6.2.1: More (And More) Styles For All Editable Element</h4>
 			<div class="exampleBody">
-				The <strong>bold text</strong> there is editable, with two classes applied.
+				The <strong>bold text</strong> there is editable (aren't you tired of this?)
+				but is more important note how many new class are added to the element.
 			</div>
 			<pre>
-    >>> $("#example6-1-1 .exampleBody strong").inlineEdit({
-    ...     editableClass: 'ImEditable ImReallyEditable fooClass'
+    >>> $("#example6-2-1 .exampleBody strong").inlineEdit({
+    ...     editableClass: 'inlineEditableElement ImEditable ImReallyEditable fooClass'
     ... });
 			</pre>
 			<p class="summary">
 				You can give multiple class to the <code class="api">editableClass</code> parameter,
-				putting a space for divide them.
+				putting a space for divide them.<br/>
+				When you use this parameter for changing the default, think about put also in the list
+				the default &quot;<em>inlineEditableElement</em>&quot;. However this is not required.
 			</p>
 		</div>
 
+		TODO: examples with onInit event
 
 		</form>
 		
