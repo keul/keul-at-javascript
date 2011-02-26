@@ -26,7 +26,10 @@
 			// validation
 			validate: null,
 			// Styles
-			editableClass: 'inlineEditableElement'
+			editableClass: 'inlineEditableElement',
+			// multiline/advanced editing
+			multiLine: false,
+			contentType: 'text'
 		};
 		$.extend(options, ops || {});
 		
@@ -56,10 +59,16 @@
 				}
 
 				event.preventDefault();
-				$this.data('originalValue', $this.text());
+				$this.data('originalValue', $this[options.contentType]());
 				var originalSize = $this.width();
-				var $editField = $('<input/>', {'type': 'text', 'class': 'editField'}).val($this.data('originalValue'));
-				$editField.css('width', originalSize + 'px');
+				var $editField = null;
+				if (options.multiLine) {
+					$editField = $('<textarea/>', {'class': 'editField'});	
+				} else {
+					$editField = $('<input/>', {'type': 'text', 'class': 'editField'});
+				}
+				
+				$editField.val($this.data('originalValue')).css('width', originalSize + 'px');
 
 				if (options.onInitField) {
 					var initFieldResult = options.onInitField.call($editField);
@@ -70,6 +79,10 @@
 
 				$this.empty().append($editField).unbind(options.event+'.InlineEdit');
 				$editField.keydown(function(event) {
+					// look for multiline and enter key
+					if (event.which===13 && options.multiLine) {
+						return;
+					}
 					if (options.preventFormSubmission && event.which===13) {
 						event.preventDefault();
 					}
@@ -94,7 +107,7 @@
 
 			var abortInlineEditHandler = function(event) {
 				var discardedText = $(event.target).val();
-				$this.empty().text($this.data('originalValue'));
+				$this.empty()[options.contentType]($this.data('originalValue'));
 				$this.removeData('originalValue');
 				$this.bind(options.event+'.InlineEdit', activateInlinEditHandler);
 				if (options.onCancel) {
@@ -117,7 +130,7 @@
 						return;
 					}
 				}
-				$this.empty().text(newValue);
+				$this.empty()[options.contentType](newValue);
 				$this.removeData('originalValue');
 				$this.bind(options.event+'.InlineEdit', activateInlinEditHandler);
 

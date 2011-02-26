@@ -63,7 +63,7 @@ pre {
 }
 
 .inlineEditableElement {
-	cursor:pointer;
+	cursor: pointer;
 }
 .ImEditable {
 	border-bottom: 2px dashed;
@@ -71,4 +71,9 @@ pre {
 }
 .ImReallyEditable {
 	text-decoration: line-through;
+}
+
+.text {
+	font-size: 90%;
+	padding-left: 2em;
 }

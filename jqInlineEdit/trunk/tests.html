@@ -5,9 +5,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>jqInlineEdit jQuery Plugin - Live Demo &amp; Documentation</title>
 		<link rel="stylesheet" type="text/css" media="all" href="tests.css" />
-		<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+		<script type="text/javascript" src="3rd-party/jquery-1.4.4.min.js"></script>
 		<script type="text/javascript" src="jquery.jqInlineEdit.js"></script>
 		<script type="text/javascript" src="tests.js"></script>
+		<script type="text/javascript" src="3rd-party/tiny_mce.js"></script>
+		<script type="text/javascript">
+		<!--
+			tinyMCE.init({
+        		mode : "none",
+			});
+		//-->
+		</script>
     </head>
     <body>
         <h1>jqInlineEdit jQuery Plugin - Live Demo &amp; Documentation</h1>
@@ -426,8 +434,8 @@
 				In its general version, <code class="api">validate</code> is a function called before the user changes
 				are applied.<br/>
 				Inside the function, the <code>this</code> reference if the current jQuery content.
-				The function can have a <code class="apiParameter">newValue</code> parameter that is the new value that
-				the user want to submit to validation.<br/>
+				The function can have a <code class="apiParameter">newValue</code> parameter that is the new value
+				that the user want to submit to validation.<br/>
 				If the function return a boolean <code>false</code>, the plugin cancel the action.<br/>
 			</p>
 		</div>
@@ -466,10 +474,17 @@
 				is an example for this. Have you noted that all editable elements, when the mouse
 				move on them, are changing the cursor to a pointer?
 			</div>
+    		<pre>
+    .inlineEditableElement {
+        cursor: pointer;
+    }
+			</pre>
 			<p class="summary">
 				When you enable the inline edit, automatically you are applying a new CSS class
 				named &quot;<em>inlineEditableElement</em>&quot; to them.<br/>
-				This is the default value for the <code class="api">editableClass</code> parameter.
+				This is the default value for the <code class="api">editableClass</code>
+				parameter.<br/>
+				The only code I can put here is the CSS rules used in this documentation page.
 			</p>
 		</div>
 
@@ -511,11 +526,111 @@
 				You can give multiple class to the <code class="api">editableClass</code> parameter,
 				putting a space for divide them.<br/>
 				When you use this parameter for changing the default, think about put also in the list
-				the default &quot;<em>inlineEditableElement</em>&quot;. However this is not required.
+				the plugin default &quot;<em>inlineEditableElement</em>&quot;. However this is not required.
 			</p>
 		</div>
 
-		TODO: examples with onInit event
+		<div id="example6-3" class="example">
+			<h3>Example 6.3: Style Is Not For All</h3>
+			<div class="exampleBody">
+				There are originally <strong>three</strong> editable text
+				<strong>inside this document</strong>.<br/>
+				You can edit <strong>all but the second</strong>. So you style is applied to all but this
+				elements.
+			</div>
+			<pre>
+    >>> $("#example6-3 .exampleBody strong").inlineEdit({
+    ...     onInit: function() {
+    ...         if (this.text()==='inside this document') {
+    ...             return false;
+    ...         }
+    ...     },
+    ...     editableClass: 'inlineEditableElement ImEditable'
+    ... });
+			</pre>
+			<p class="summary">
+				The <code class="api">editableClass</code> provided is applied to element in the page that
+				are really editable.<br/>
+				This mean that if you also use the <code class="api">onInit</code> parameter with an init
+				function to be called, if this function return <code>false</code> in the context of an
+				element, the item is not editable.
+				An for this reason also the CSS class is not given to the element.
+			</p>
+		</div>
+
+		<h2> More Text </h2>
+
+		<div id="example7-1" class="example">
+			<h3>Example 7.1: Are You Able To Handle All This Text?</h3>
+			<div class="exampleBody">
+				The is a big paragraph inside this example. Click and edit it
+				<p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vitae tortor quam. Morbi
+ut dui nibh. Etiam mattis vehicula urna in imperdiet. Phasellus faucibus condimentum augue
+venenatis blandit. Donec fermentum ligula eget mi eleifend a lobortis diam eleifend.
+In dictum consectetur leo, vel ullamcorper metus auctor ut. Proin non lorem eu dolor
+lobortis venenatis vulputate sit amet arcu. Nullam imperdiet blandit lacus; eu fringilla
+nunc congue non. Fusce id venenatis ipsum? Nam sed arcu et velit fermentum euismod.
+Integer consequat interdum arcu vitae laoreet. Praesent vitae ipsum a dolor viverra
+pulvinar nec et odio. Curabitur vel massa at erat suscipit volutpat quis vitae dui.
+Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+			</div>
+			<pre>
+    >>> $("#example7-1 .exampleBody p.text").inlineEdit({
+    ...     multiLine: true
+    ... });
+			</pre>
+			<p class="summary">
+				When the text size to edit begin to grow, a better way to edit code content is using a
+				<code>textarea</code> instead of a text <code>input</code>.<br/>
+				The <code class="api">multiLine</code> parameter is responsible of this; its default
+				value <code>false</code> says that the HTML element used will be a text input field.
+				Change it to <code>true</code> to use an HTML <code>textarea</code>.<br/>
+				<strong>Note</strong> that when putting <code class="api">multiLine</code> paramenter
+				to <code>true</code>, the <code>ENTER</code> key will not be used anymore as accept key.
+				Inside <code>textarea</code> this key is for normal newline usage.
+			</p>
+		</div>
+
+		<div id="example7-2" class="example">
+			<h3>Example 7.2: Not Simple Text</h3>
+			<div class="exampleBody">
+				Click on the editable pararaph and edit it, but note that inside you'll see also HTML tags.
+				Try to play with HTML tags (if you are not an expert of HTML, try to put a random
+				&quot;&lt;hr/&gt;&quot; inside the text). This will add an horizontal line to the text.
+<div class="text">
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. <em>Quisque ut diam sit amet justo volutpat convallis.
+Vestibulum convallis consectetur risus; eget gravida odio sollicitudin non! Aliquam aliquam, sem at convallis
+posuere, nunc arcu imperdiet diam, non</em>luctus tellus massa eget erat! Suspendisse felis massa, elementum sit
+amet eleifend sed, tincidunt vel purus. Maecenas faucibus nunc sit amet turpis rutrum rutrum. Pellentesque
+ornare mi nec turpis sagittis nec rutrum sapien tempor! Integer pellentesque sollicitudin feugiat. Quisque
+malesuada, mauris ac lacinia consequat, nisi velit commodo metus, sed molestie massa turpis vitae sem. Aenean
+vitae lorem lectus, vel placerat erat. Morbi interdum orci ut massa scelerisque faucibus. Morbi id orci nunc.
+Ut at nisl sed metus tempor egestas et non dui. Suspendisse pretium libero mauris. Nam erat velit; blandit et
+sagittis ut; ultricies eu est. Sed massa mauris, consequat id ultrices in, eleifend sit amet arcu. Suspendisse
+facilisis egestas massa et egestas. Praesent eget ligula orci, nec venenatis dolor? Morbi ultricies, est vel
+consectetur venenatis, tellus urna sollicitudin leo, vel eleifend sapien nulla id augue. Maecenas rhoncus
+tincidunt mattis.
+</p>
+
+<p>
+Suspendisse lacus dui, tempus quis rutrum in, venenatis non purus? Donec sit amet magna vitae erat sodales
+porttitor. Praesent in sapien sed arcu varius pulvinar non a mi. Duis adipiscing suscipit placerat. Aenean feugiat
+consequat nunc, quis rutrum <strong>nulla dignissim a</strong>. Vestibulum pharetra, leo a rutrum blandit, nulla mauris
+elementum eros, sed commodo mi ante vel nibh. Cras feugiat nisl sit amet mauris scelerisque id placerat elit placerat!
+Vivamus at euismod sapien. Maecenas justo libero, luctus ut ultrices a, blandit sed velit. Proin consequat lacus
+et nunc aliquet et fringilla enim congue. Morbi laoreet est commodo ipsum dapibus a eleifend justo sollicitudin!
+Integer ac porta nisl. Nulla scelerisque consequat arcu eget consectetur. Aenean id elementum tortor. Aliquam
+turpis nunc, auctor id imperdiet et, fermentum a elit! In iaculis porttitor fringilla.
+</p>
+</div>
+			</div>
+			<pre>
+			</pre>
+			<p class="summary">
+			</p>
+		</div>
+
 
 		</form>
 		

@@ -81,6 +81,23 @@ $(document).ready(function() {
 		editableClass: 'inlineEditableElement ImEditable ImReallyEditable fooClass'
 	});
 
+	$("#example6-3 .exampleBody strong").inlineEdit({
+		onInit: function() {
+			if (this.text()==='inside this document') {
+				return false;
+			}
+		},
+		editableClass: 'inlineEditableElement ImEditable'
+	});
+
+	$("#example7-1 .exampleBody p.text").inlineEdit({
+		multiLine: true
+	});
+
+
+
+	// tinyMCE.execCommand("mceAddControl", true, "id");
+
 
 	// Special example where is better to stop ENTER form SUBMIT
 	$(".preventMovingOn input").live('keydown', function(event) {
