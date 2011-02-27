@@ -596,7 +596,7 @@ Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
 			<div class="exampleBody">
 				Click on the editable pararaph and edit it, but note that inside you'll see also HTML tags.
 				Try to play with HTML tags (if you are not an expert of HTML, try to put a random
-				&quot;&lt;hr/&gt;&quot; inside the text). This will add an horizontal line to the text.
+				&quot;&lt;hr/&gt;&quot; inside the text; this will add an horizontal line inside text).
 <div class="text">
 <p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. <em>Quisque ut diam sit amet justo volutpat convallis.
@@ -626,8 +626,38 @@ turpis nunc, auctor id imperdiet et, fermentum a elit! In iaculis porttitor frin
 </div>
 			</div>
 			<pre>
+    >>> $("#example7-2 .exampleBody .text").inlineEdit({
+    ...     multiLine: true,
+    ...     contentType: 'html'
+    ... });
 			</pre>
 			<p class="summary">
+				I didn't talk about it, but in the last example you can see that edit multiline text block
+				in an HTML environment is not so interesting.
+				All whitespaces and newline are really saved and are still there if you go back to edit the
+				text, but they leave to no effect to the page.<br/>
+				When you want to edit a piece of page that isn't a simple string text, like in all other
+				examples we see there, you will get more effect beeing able to manage the HTML itself, not
+				simple text.<br/>
+				This example show you the use of <code class="api">contentType</code> parameter, that is
+				defaulted to <code>text</code>. If you change it to <code>HTML</code> you say to the plugin
+				that you want to edit the text node as HTML, not simple text. 
+			</p>
+		</div>
+
+		<div id="example7-2-1" class="example subExample">
+			<h4>Example 7.2.1: HTML In Simple Text Lines</h4>
+			<div class="exampleBody">
+				Click on <strong>the<sup>bold text</sup></strong> and see you can use HTML there.
+			</div>
+			<pre>
+    >>> $("#example7-2-1 .exampleBody .strong").inlineEdit({
+    ...     contentType: 'html'
+    ... });
+			</pre>
+			<p class="summary">
+				Not so common, but you can use <code class="api">contentType</code> as <code>html</code>
+				also for non-multiline text.
 			</p>
 		</div>
 

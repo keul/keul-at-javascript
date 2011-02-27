@@ -90,10 +90,17 @@ $(document).ready(function() {
 		editableClass: 'inlineEditableElement ImEditable'
 	});
 
-	$("#example7-1 .exampleBody p.text").inlineEdit({
+	$("#example7-1 .exampleBody .text").inlineEdit({
 		multiLine: true
 	});
 
+	$("#example7-2 .exampleBody .text").inlineEdit({
+		multiLine: true,
+		contentType: 'html'
+	});
+	$("#example7-2-1 .exampleBody .strong").inlineEdit({
+		contentType: 'html'
+	});
 
 
 	// tinyMCE.execCommand("mceAddControl", true, "id");
