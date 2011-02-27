@@ -6,8 +6,6 @@
         <title>jqInlineEdit jQuery Plugin - Live Demo &amp; Documentation</title>
 		<link rel="stylesheet" type="text/css" media="all" href="tests.css" />
 		<script type="text/javascript" src="3rd-party/jquery-1.4.4.min.js"></script>
-		<script type="text/javascript" src="jquery.jqInlineEdit.js"></script>
-		<script type="text/javascript" src="tests.js"></script>
 		<script type="text/javascript" src="3rd-party/tiny_mce.js"></script>
 		<script type="text/javascript">
 		<!--
@@ -16,6 +14,8 @@
 			});
 		//-->
 		</script>
+		<script type="text/javascript" src="jquery.jqInlineEdit.js"></script>
+		<script type="text/javascript" src="tests.js"></script>
     </head>
     <body>
         <h1>jqInlineEdit jQuery Plugin - Live Demo &amp; Documentation</h1>
@@ -357,7 +357,7 @@
 			</pre>
 			<p class="summary">
 				I don't want to take it longer. Now you are customized you text, but you are able to
-				be warned of thi update, and make something after.<br/>
+				be warned of this update, and make something after.<br/>
 				The <code class="api">onEdit</code> function is called when the text has been changes.
 				Inside it you can use the <code>this</code> reference to get the edited node.<br/>
 				This time what you return from the function doesn't matter. The page has been already
@@ -651,13 +651,56 @@ turpis nunc, auctor id imperdiet et, fermentum a elit! In iaculis porttitor frin
 				Click on <strong>the<sup>bold text</sup></strong> and see you can use HTML there.
 			</div>
 			<pre>
-    >>> $("#example7-2-1 .exampleBody .strong").inlineEdit({
+    >>> $("#example7-2-1 .exampleBody strong").inlineEdit({
     ...     contentType: 'html'
     ... });
 			</pre>
 			<p class="summary">
 				Not so common, but you can use <code class="api">contentType</code> as <code>html</code>
 				also for non-multiline text.
+			</p>
+		</div>
+
+		<div id="example7-3" class="example subExample">
+			<h3>Example 7.3: Edit HTML Manually Is For Loosers</h3>
+			<div class="exampleBody">
+				Click aain on the big editable paragraph... and watch the surprise.
+<div class="text">
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. <em>Quisque ut diam sit amet justo volutpat convallis.
+Vestibulum convallis consectetur risus; eget gravida odio sollicitudin non! Aliquam aliquam, sem at convallis
+posuere, nunc arcu imperdiet diam, non</em>luctus tellus massa eget erat! Suspendisse felis massa, elementum sit
+amet eleifend sed, tincidunt vel purus. Maecenas faucibus nunc sit amet turpis rutrum rutrum. Pellentesque
+ornare mi nec turpis sagittis nec rutrum sapien tempor! Integer pellentesque sollicitudin feugiat. Quisque
+malesuada, mauris ac lacinia consequat, nisi velit commodo metus, sed molestie massa turpis vitae sem. Aenean
+vitae lorem lectus, vel placerat erat. Morbi interdum orci ut massa scelerisque faucibus. Morbi id orci nunc.
+Ut at nisl sed metus tempor egestas et non dui. Suspendisse pretium libero mauris. Nam erat velit; blandit et
+sagittis ut; ultricies eu est. Sed massa mauris, consequat id ultrices in, eleifend sit amet arcu. Suspendisse
+facilisis egestas massa et egestas. Praesent eget ligula orci, nec venenatis dolor? Morbi ultricies, est vel
+consectetur venenatis, tellus urna sollicitudin leo, vel eleifend sapien nulla id augue. Maecenas rhoncus
+tincidunt mattis.
+</p>
+
+<p>
+Suspendisse lacus dui, tempus quis rutrum in, venenatis non purus? Donec sit amet magna vitae erat sodales
+porttitor. Praesent in sapien sed arcu varius pulvinar non a mi. Duis adipiscing suscipit placerat. Aenean feugiat
+consequat nunc, quis rutrum <strong>nulla dignissim a</strong>. Vestibulum pharetra, leo a rutrum blandit, nulla mauris
+elementum eros, sed commodo mi ante vel nibh. Cras feugiat nisl sit amet mauris scelerisque id placerat elit placerat!
+Vivamus at euismod sapien. Maecenas justo libero, luctus ut ultrices a, blandit sed velit. Proin consequat lacus
+et nunc aliquet et fringilla enim congue. Morbi laoreet est commodo ipsum dapibus a eleifend justo sollicitudin!
+Integer ac porta nisl. Nulla scelerisque consequat arcu eget consectetur. Aenean id elementum tortor. Aliquam
+turpis nunc, auctor id imperdiet et, fermentum a elit! In iaculis porttitor fringilla.
+</p>
+</div>
+			</div>
+			<pre>
+
+			</pre>
+			<p class="summary">
+				For this interesting example I call a friend: the
+				<a href="http://tinymce.moxiecode.com/" rel="external">TinyMCE WYSIWYG editor</a>.<br/>
+				Edit HTML is a great feature, but not so useful if you need to do it manually. This example
+				is shows you the great power of the plugin when you don't need only to edit simple text.
 			</p>
 		</div>
 

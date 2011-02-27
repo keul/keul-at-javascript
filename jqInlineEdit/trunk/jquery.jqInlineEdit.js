@@ -60,7 +60,8 @@
 
 				event.preventDefault();
 				$this.data('originalValue', $this[options.contentType]());
-				var originalSize = $this.width();
+				var originalWidth = $this.width();
+				var originalHeight = $this.height();
 				var $editField = null;
 				if (options.multiLine) {
 					$editField = $('<textarea/>', {'class': 'editField'});	
@@ -68,7 +69,10 @@
 					$editField = $('<input/>', {'type': 'text', 'class': 'editField'});
 				}
 				
-				$editField.val($this.data('originalValue')).css('width', originalSize + 'px');
+				$editField.val($this.data('originalValue')).css('width', originalWidth + 'px');
+				if (options.multiLine) {
+					$editField.css('height', originalHeight + 'px'); 
+				}
 
 				if (options.onInitField) {
 					var initFieldResult = options.onInitField.call($editField);
@@ -78,6 +82,11 @@
 				}
 
 				$this.empty().append($editField).unbind(options.event+'.InlineEdit');
+
+				if (options.afterInitField) {
+					options.afterInitField.call($editField);
+				}
+
 				$editField.keydown(function(event) {
 					// look for multiline and enter key
 					if (event.which===13 && options.multiLine) {

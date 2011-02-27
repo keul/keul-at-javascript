@@ -98,8 +98,17 @@ $(document).ready(function() {
 		multiLine: true,
 		contentType: 'html'
 	});
-	$("#example7-2-1 .exampleBody .strong").inlineEdit({
+	$("#example7-2-1 .exampleBody strong").inlineEdit({
 		contentType: 'html'
+	});
+
+	$("#example7-3 .exampleBody .text").inlineEdit({
+		multiLine: true,
+		contentType: 'html',
+		afterInitField: function() {
+			this.attr('id', 'foo1');
+			tinyMCE.execCommand("mceAddControl", true, "foo1")
+		}
 	});
 
 
