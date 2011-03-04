@@ -107,12 +107,9 @@ $(document).ready(function() {
 		contentType: 'html',
 		afterInitField: function() {
 			this.attr('id', 'foo1');
-			tinyMCE.execCommand("mceAddControl", true, "foo1")
+			tinyMCE.execCommand("mceAddControl", false, "foo1")
 		}
 	});
-
-
-	// tinyMCE.execCommand("mceAddControl", true, "id");
 
 
 	// Special example where is better to stop ENTER form SUBMIT
