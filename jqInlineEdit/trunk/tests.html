@@ -7,13 +7,6 @@
 		<link rel="stylesheet" type="text/css" media="all" href="tests.css" />
 		<script type="text/javascript" src="3rd-party/jquery-1.4.4.min.js"></script>
 		<script type="text/javascript" src="3rd-party/tiny_mce.js"></script>
-		<script type="text/javascript">
-		<!--
-			tinyMCE.init({
-        		mode : "none",
-			});
-		//-->
-		</script>
 		<script type="text/javascript" src="jquery.jqInlineEdit.js"></script>
 		<script type="text/javascript" src="tests.js"></script>
     </head>
@@ -76,7 +69,7 @@
 				You can start editing more than a field, not forced to one.<br/>
 				For this, you simple need to use the <code class="api">multiEditing</code> option to
 				<code>true</code>.<br/>
-				In this case if the field loose focus it will no accept the new value nor it discard it;
+				In this case if the field loose focus it will no accept the new value nor discard it;
 				you need to go back to the field and press <code>ENTER</code>.
 			</p>
 		</div>
@@ -692,6 +685,10 @@ Integer ac porta nisl. Nulla scelerisque consequat arcu eget consectetur. Aenean
 turpis nunc, auctor id imperdiet et, fermentum a elit! In iaculis porttitor fringilla.
 </p>
 </div>
+				Want to stop editing? <a href="" class="stopTiny">click here</a>!<br/>
+				When Tiny is removed we'll see the <code>textarea</code> field! To restore our modified
+				text, go the field, giving it the focus, then press <code>ESC</code>.<br/>
+				How ugly!
 			</div>
 			<pre>
 
@@ -700,10 +697,13 @@ turpis nunc, auctor id imperdiet et, fermentum a elit! In iaculis porttitor frin
 				For this interesting example I call a friend: the
 				<a href="http://tinymce.moxiecode.com/" rel="external">TinyMCE WYSIWYG editor</a>.<br/>
 				Edit HTML is a great feature, but not so useful if you need to do it manually. This example
-				is shows you the great power of the plugin when you don't need only to edit simple text.
+				is shows you the great power of the plugin when you don't need only to edit simple text.<br/>
+				In this example we use the new <code class="api">afterInitField</code> parameter, a callable
+				function that we can use to perform something just after the editable field has been inited.
+				In this function you can refer to <code>this</code> as the jQuery context referred to the 
+				text field.
 			</p>
 		</div>
-
 
 		</form>
 		

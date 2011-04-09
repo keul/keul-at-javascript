@@ -3,6 +3,12 @@
  * Tests script for jqInlineEdit
  */
 
+tinyMCE.init({
+	mode : "none",
+	theme: "simple"
+});
+
+
 $(document).ready(function() {
 		
 	$("#example1-1 .exampleBody strong").inlineEdit();
@@ -105,10 +111,17 @@ $(document).ready(function() {
 	$("#example7-3 .exampleBody .text").inlineEdit({
 		multiLine: true,
 		contentType: 'html',
+		multiEditing: true,
+		cancelKey: null,
+		acceptKey: 27,
 		afterInitField: function() {
 			this.attr('id', 'foo1');
-			tinyMCE.execCommand("mceAddControl", false, "foo1")
+			tinyMCE.execCommand('mceAddControl', false, "foo1");
 		}
+	});
+	$("#example7-3 .exampleBody .stopTiny").click(function(event){
+		event.preventDefault();
+		tinyMCE.execCommand('mceRemoveControl', false, "foo1");
 	});
 
 
