@@ -124,6 +124,29 @@ $(document).ready(function() {
 		tinyMCE.execCommand('mceRemoveControl', false, "foo1");
 	});
 
+	$("#example7-3-1 .exampleBody .text").inlineEdit({
+		multiLine: true,
+		contentType: 'html',
+		multiEditing: true,
+		afterInitField: function() {
+			this.attr('id', 'foo2');
+			tinyMCE.execCommand('mceAddControl', false, "foo2");
+		},
+		event: 'myTrigger'
+	});
+	$("#example7-3-1 .exampleBody a").click(function(event){
+		event.preventDefault();
+		if (!tinyMCE.getInstanceById('foo2')) {
+			$("#example7-3-1 .exampleBody .text").trigger('myTrigger.InlineEdit');
+		} else {
+			tinyMCE.execCommand('mceRemoveControl', false, "foo2");
+			$("#foo2").trigger('update.InlineEdit');
+		}
+		
+	});
+
+
+
 
 	// Special example where is better to stop ENTER form SUBMIT
 	$(".preventMovingOn input").live('keydown', function(event) {

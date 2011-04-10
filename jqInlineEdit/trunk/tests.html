@@ -687,11 +687,26 @@ turpis nunc, auctor id imperdiet et, fermentum a elit! In iaculis porttitor frin
 </div>
 				Want to stop editing? <a href="" class="stopTiny">click here</a>!<br/>
 				When Tiny is removed we'll see the <code>textarea</code> field! To restore our modified
-				text, go the field, giving it the focus, then press <code>ESC</code>.<br/>
+				text, go the field, giving it the focus, then press <code>ESC</code>
+				(as we configured this key as accept key).<br/>
 				How ugly!
 			</div>
 			<pre>
-
+    >>> $("#example7-3 .exampleBody .text").inlineEdit({
+    ...     multiLine: true,
+    ...     contentType: 'html',
+    ...     multiEditing: true,
+    ...     cancelKey: null,
+    ...     acceptKey: 27,
+    ...     afterInitField: function() {
+    ...         this.attr('id', 'foo1');
+    ...         tinyMCE.execCommand('mceAddControl', false, "foo1");
+    ...     }
+    ... });
+    >>> $("#example7-3 .exampleBody .stopTiny").click(function(event){
+    ...     event.preventDefault();
+    ...     tinyMCE.execCommand('mceRemoveControl', false, "foo1");
+    ... });
 			</pre>
 			<p class="summary">
 				For this interesting example I call a friend: the
@@ -701,9 +716,54 @@ turpis nunc, auctor id imperdiet et, fermentum a elit! In iaculis porttitor frin
 				In this example we use the new <code class="api">afterInitField</code> parameter, a callable
 				function that we can use to perform something just after the editable field has been inited.
 				In this function you can refer to <code>this</code> as the jQuery context referred to the 
-				text field.
+				text field.<br/>
+				Note that we need to use also the <code class="api">multiLine</code> parameter, as when TinyMCE
+				start, our field loose the focus but we still need to have as as a <code>textarea</code>
+				even if hidden by TinyMCE.
 			</p>
 		</div>
+
+		<div id="example7-3-1" class="example subExample">
+			<h4>Example 7.3.1: Again Use TinyMCE (But A Better Example)</h4>
+			<div class="exampleBody">
+				Click on the <a href="">EDIT</a> link and play with TinyMCE; click again for stop editing.
+<div class="text">
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. <em>Quisque ut diam sit amet justo volutpat convallis.
+Vestibulum convallis consectetur risus; eget gravida odio sollicitudin non! Aliquam aliquam, sem at convallis
+posuere, nunc arcu imperdiet diam, non</em>luctus tellus massa eget erat! Suspendisse felis massa, elementum sit
+amet eleifend sed, tincidunt vel purus. Maecenas faucibus nunc sit amet turpis rutrum rutrum. Pellentesque
+ornare mi nec turpis sagittis nec rutrum sapien tempor! Integer pellentesque sollicitudin feugiat. Quisque
+malesuada, mauris ac lacinia consequat, nisi velit commodo metus, sed molestie massa turpis vitae sem. Aenean
+vitae lorem lectus, vel placerat erat. Morbi interdum orci ut massa scelerisque faucibus. Morbi id orci nunc.
+Ut at nisl sed metus tempor egestas et non dui. Suspendisse pretium libero mauris. Nam erat velit; blandit et
+sagittis ut; ultricies eu est. Sed massa mauris, consequat id ultrices in, eleifend sit amet arcu. Suspendisse
+facilisis egestas massa et egestas. Praesent eget ligula orci, nec venenatis dolor? Morbi ultricies, est vel
+consectetur venenatis, tellus urna sollicitudin leo, vel eleifend sapien nulla id augue. Maecenas rhoncus
+tincidunt mattis.
+</p>
+
+<p>
+Suspendisse lacus dui, tempus quis rutrum in, venenatis non purus? Donec sit amet magna vitae erat sodales
+porttitor. Praesent in sapien sed arcu varius pulvinar non a mi. Duis adipiscing suscipit placerat. Aenean feugiat
+consequat nunc, quis rutrum <strong>nulla dignissim a</strong>. Vestibulum pharetra, leo a rutrum blandit, nulla mauris
+elementum eros, sed commodo mi ante vel nibh. Cras feugiat nisl sit amet mauris scelerisque id placerat elit placerat!
+Vivamus at euismod sapien. Maecenas justo libero, luctus ut ultrices a, blandit sed velit. Proin consequat lacus
+et nunc aliquet et fringilla enim congue. Morbi laoreet est commodo ipsum dapibus a eleifend justo sollicitudin!
+Integer ac porta nisl. Nulla scelerisque consequat arcu eget consectetur. Aenean id elementum tortor. Aliquam
+turpis nunc, auctor id imperdiet et, fermentum a elit! In iaculis porttitor fringilla.
+</p>
+</div>
+
+			</div>
+			<pre>
+
+			</pre>
+			<p class="summary">
+				
+			</p>
+		</div>
+
 
 		</form>
 		
