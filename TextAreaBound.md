@@ -1,0 +1,34 @@
+A jQuery plugin that add some new features, limits and bounds to **HTML textarea**
+
+## Internet Explorer support ##
+I can't find a way to make this plugin really works on Internet Explorer. Can you give me help for find a _real_ alternative to the **selectionStart** Javascript API?
+
+## How to use ##
+
+All those features maintain the **jQuery chaining** behaviour.
+
+### maxTextLength ###
+
+Set the max text length in numbers of characters inside selected textareas.
+
+```
+$(".foo").maxTextLength(500)
+```
+
+### maxLinesCountBound ###
+
+Set the max number of lines inside all selected textareas.
+
+```
+$(".foo").maxLinesCountBound(5)
+```
+
+### maxLinesLengthBound ###
+
+Set the max character inside each lines of textareas selected.
+
+```
+$(".foo").maxLinesLengthBound("20")
+```
+
+**This is not working on Internet Explorer** (see above).
